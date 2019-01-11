@@ -1,0 +1,27 @@
+<ion-app>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Acceso al sistema BEAT</ion-title>
+    </ion-toolbar> 
+  </ion-header>
+
+  <ion-content padding>
+
+    <form [formGroup]="formulario" (ngSubmit)="acceder()">
+      <ion-item>
+        <ion-input required type="text" formControlName="email"  placeholder="Email..."></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input required type="text" formControlName="clave"  placeholder="Clave..."></ion-input>
+      </ion-item>
+
+
+      <ion-button (click)="acceder()">
+        Acceder al sistema
+      </ion-button>
+
+    </form>   
+
+  </ion-content>
+</ion-app>
