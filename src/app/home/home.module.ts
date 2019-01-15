@@ -16,6 +16,10 @@ import { ClientesComponent } from './clientes/clientes.component';
       {
         path: '',
         component: HomePage
+      },
+      {
+        path: 'clientes',
+        component: ClientesComponent
       }
     ])
   ],

@@ -21,8 +21,7 @@ const routes: Routes = [
     path: 'list',
     loadChildren: './list/list.module#ListPageModule'
   },
-  { path: 'albaranes', loadChildren: './home/albaranes/albaranes.module#AlbaranesPageModule' },
-  { path: 'clientes', loadChildren: './home/clientes/clientes.module#ClientesPageModule' },
+  { path: 'albaranes', loadChildren: './home/albaranes/albaranes.module#AlbaranesPageModule' }  
  // { path: 'login', loadChildren: './seguridad/login/login.module#LoginPageModule' }
 ];
 

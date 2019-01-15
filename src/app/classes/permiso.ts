@@ -1,18 +1,23 @@
 export class Permiso {
-    private nombre: string;
-    private codigo: string;
-  
-    public getNombre(): string{
-      return this.nombre;
-    }
-  
-    public getCodigo(): string{
-      return this.codigo;
-    }
-  
-    constructor(permiso: any) {
-      this.nombre = permiso.nombre;
-      this.codigo = permiso.codigo;
-    }
+  public nombre: string;
+  public codigo: string;
+  public localizable: boolean;
+
+  public getNombre(): string {
+    return this.nombre;
   }
-  
+
+  public getCodigo(): string {
+    return this.codigo;
+  }
+
+  public getLocalizable(): boolean {
+    return this.localizable;
+  }
+
+  constructor(permiso: any) {
+    this.nombre = permiso.nombre;
+    this.codigo = permiso.codigo;
+    this.localizable = permiso.localizable;
+  }
+}

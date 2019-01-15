@@ -22,7 +22,7 @@ export class AppComponent {
     },
     {
       title: 'Clientes',
-      url: '/clientes',
+      url: '/home/clientes',
       icon: 'list'
     },
     {

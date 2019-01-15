@@ -11,3 +11,11 @@
 @import '~@ionic/angular/css/flex-utils.css';
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
