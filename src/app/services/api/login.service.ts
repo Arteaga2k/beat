@@ -40,17 +40,18 @@ export class LoginService {
   }
 
   getLocalizacionesUsuario(usuario: any): Observable<any> {
-    const url = environment.servidor + 'usuarios/' + usuario.id + '/localizacionesConPermisos';        
+    const url = environment.servidor + 'usuarios/' + usuario.id + '/localizacionesConPermisos';    
+       
     return this.http.get(url)
       .pipe(
-        map(data => {      
+        map(data => {       
+
           const localizaciones = [];
-          for (const localizacion of data['localizaciones_con_permisos']) {
+          for (const localizacion of data['data']) {
             localizaciones.push(new Localizacion(localizacion));
           }
-          console.log(' get localizaciones usuario ', localizaciones);
-          return localizaciones;
-        
+          
+          return localizaciones;      
         }),
         catchError(this.handleError));
 

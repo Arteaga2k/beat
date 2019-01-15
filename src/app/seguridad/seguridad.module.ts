@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { LoginPage } from './login/login.page';
 import { SeleccionLocalizacionComponent } from './seleccion-localizacion/seleccion-localizacion.component';
-import { MatButtonModule, MatCheckboxModule, MatProgressBarModule, MatIconModule, MatInputModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatProgressBarModule, MatIconModule, MatInputModule, MatCardModule } from '@angular/material';
 
 
 
@@ -35,6 +35,7 @@ const routes: Routes = [
     MatButtonModule,
     MatIconModule,
     MatInputModule,
+    MatCardModule,
     MatProgressBarModule
   ],
   declarations: [LoginPage, SeleccionLocalizacionComponent]

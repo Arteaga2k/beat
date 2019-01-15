@@ -1,9 +1,18 @@
-<ion-card>
-    <ion-img src="/assets/myImg.png"></ion-img>
-    <ion-card-header>
-        <ion-card-title>Localizacion</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-        <p>The content for this card</p>
-    </ion-card-content>
-</ion-card>
+<ion-content padding>
+    <ion-card *ngFor="let localizacion of localizaciones" 
+                [ngStyle]="{'border-left': '20px solid', 'color': estiloBorde(localizacion)['border-color']}">
+        <ion-img [src]="'/assets/images/localizaciones/'+localizacion.getImagen()"></ion-img>
+        <ion-card-header class="header_cabeceras">
+            <h3>{{ localizacion.getNombre() }}</h3>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-card-subtitle>
+                <ion-icon name="information-circle" color="primary"></ion-icon> {{ localizacion.getTipo() }}
+            </ion-card-subtitle>
+            <ion-card-subtitle>
+                <ion-icon name="pin" color="primary"></ion-icon>
+                {{ localizacion.getDireccion().getDireccionTexto() }}
+            </ion-card-subtitle>
+        </ion-card-content>
+    </ion-card>   
+</ion-content>

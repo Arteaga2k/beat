@@ -3,6 +3,8 @@ import { FormGroup, Validators, EmailValidator, FormBuilder } from '@angular/for
 import { LoginService } from 'src/app/services/api/login.service';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { MenuController } from '@ionic/angular';
+import { forkJoin } from 'rxjs';
 
 
 
@@ -20,8 +22,11 @@ export class LoginPage implements OnInit {
     private fb: FormBuilder,
     private loginService: LoginService,
     private router: Router,
-    private storage: Storage
-  ) { }
+    private storage: Storage,
+    private menuCtrl: MenuController
+  ) {
+    this.menuCtrl.enable(false);
+  }
 
   ngOnInit() {
 
@@ -43,20 +48,21 @@ export class LoginPage implements OnInit {
         'email': this.formulario.get('email').value,
         'clave': this.formulario.get('clave').value,
         'acceso': this.formulario.get('acceso').value
-      }).subscribe(data => {    
+      }).subscribe(data => {
 
         console.log(' acceder ', data);
 
-        // Almacenamos los datos en el localStorage
-        this.storage.set('token', data['token']);
-        this.storage.set('usuario', JSON.stringify(data['usuario']));
-        this.storage.set('empresa', JSON.stringify(data['empresa']));
-
-        if (typeof data['localizacion'] !== 'undefined') {
-          this.storage.set('localizacion', JSON.stringify(data['localizacion']));
+        forkJoin(
+          this.storage.set('token', data['token']),
+          this.storage.set('usuario', JSON.stringify(data['usuario'])),
+          this.storage.set('empresa', JSON.stringify(data['empresa'])),
+        ).subscribe(datos => {
+          if (typeof data['localizacion'] !== 'undefined') {
+            this.storage.set('localizacion', JSON.stringify(data['localizacion']));
+          }
+          this.router.navigateByUrl(data['redirect']);
         }
-
-        this.router.navigateByUrl(data['redirect']);
+        );
       }, err => {
 
         this.cargando = false;
