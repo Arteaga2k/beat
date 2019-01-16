@@ -35,7 +35,16 @@ export class SeleccionLocalizacionComponent implements OnInit {
       //todo cargar las localizaciones
       this.cargaLocalizaciones();
     });
+  }
 
+  seleccionar(localizacion: Localizacion) {
+    console.log(' localizacion seleccionada ', localizacion);
+    
+    this.storage.set('localizacion', JSON.stringify(localizacion)).then(() => {
+      this.menuCtrl.enable(true);
+      this.router.navigate([environment.url_home]);    
+    }
+    );  
   }
 
   cargaLocalizaciones() {
@@ -76,16 +85,8 @@ export class SeleccionLocalizacionComponent implements OnInit {
 
     const hexColor = localizacion.getColor() != null ? '#' + localizacion.getColor() : '#000000';
 
-    return {
-      //'border-top-width': '10px',
-      //'border-left-width': '25px',
-      //'border-right-width': '10px',
-      //'border-bottom-width': '10px',
-      'border-style': 'solid',
-      'border-width': '10px',
-      'border-color': hexColor,
-      'border-radius': '5px',
-      //'background-color': shadeColor2(hexColor, 0.6)
+    return {    
+      'border-color': hexColor     
     };
   }
 

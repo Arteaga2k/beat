@@ -1,6 +1,8 @@
 {
   "name": "beatApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "de341307"
 }

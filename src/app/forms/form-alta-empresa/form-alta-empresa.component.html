@@ -1,0 +1,164 @@
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body" *blockUI="'cargando-datos'">
+                <form [formGroup]="empresaForm" (ngSubmit)="guardarEmpresa()">
+                    <ngb-tabset class="tab-solid tab-solid-primary">
+                        <ngb-tab title="Datos personales">
+                            <ng-template ngbTabContent>
+                                <div class="row">
+                                    <div class="form-group col-xl-9 col-lg-8 col-md-6 col-sm-12">
+                                        <label for="input-nombre"> Nombre* </label>
+                                        <input type="text" id="input-nombre" class="form-control form-control-sm" formControlName="nombre" placeholder="Nombre..." [ngClass]="{
+                        'is-invalid text-danger border-danger':
+                          mostrarErrores && empresaForm.get('nombre').invalid
+                      }" />
+                                        <span *ngIf="
+                        mostrarErrores &&
+                        empresaForm.get('nombre').invalid &&
+                        empresaForm.get('nombre').hasError('required')
+                      " class="text-small text-danger">
+                                            El campo nombre es requerido.
+                                        </span>
+                                    </div>
+                                    <div class="form-group col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                                        <label for="input-cif"> CIF / NIF* </label>
+                                        <input type="text" formControlName="cif" id="input-cif" class="form-control form-control-sm" maxlength="9" placeholder="CIF/NIF..." [ngClass]="{
+                        'is-invalid text-danger':
+                          mostrarErrores && empresaForm.get('cif').invalid
+                      }" />
+                                        <span *ngIf="
+                        mostrarErrores &&
+                        empresaForm.get('cif').hasError('required')
+                      " class="text-small text-danger">
+                                            El campo CIF/NIF es requerido.
+                                        </span>
+                                        <span *ngIf="
+                        mostrarErrores &&
+                        empresaForm.get('cif').hasError('invalidCifNif')
+                      " class="text-small text-danger">
+                                            El campo CIF/NIF no es válido.
+                                        </span>
+                                    </div>
+                                    <div class="form-group col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                                        <label> Email* </label>
+                                        <input type="email" formControlName="email" class="form-control form-control-sm" placeholder="Email..." [ngClass]="{
+                        'is-invalid text-danger':
+                          mostrarErrores && empresaForm.get('email').invalid
+                      }" />
+                                        <span *ngIf="
+                        mostrarErrores &&
+                        empresaForm.get('email').hasError('required')
+                      " class="text-small text-danger">
+                                            El campo email es requerido.
+                                        </span>
+                                        <span *ngIf="
+                        mostrarErrores &&
+                        empresaForm.get('email').hasError('email')
+                      " class="text-small text-danger">
+                                            El email introducido no es válido.
+                                        </span>
+                                    </div>
+                                    <div class="form-group col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                                        <label> Teléfono* </label>
+                                        <input type="tel" formControlName="telefono" class="form-control form-control-sm" maxlength="20" placeholder="Teléfono..." [ngClass]="{
+                        'is-invalid text-danger':
+                          mostrarErrores && empresaForm.get('telefono').invalid
+                      }" />
+                                        <span *ngIf="
+                        mostrarErrores &&
+                        empresaForm.get('telefono').hasError('required')
+                      " class="text-small text-danger">
+                                            El campo teléfono es requerido.
+                                        </span>
+                                    </div>
+                                    <div class="form-group col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                                        <label> FAX </label>
+                                        <input type="text" formControlName="fax" class="form-control form-control-sm" maxlength="20" placeholder="FAX..." />
+                                    </div>
+                                    <div class="form-group col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                                        <label> Código </label>
+                                        <input type="text" formControlName="codigo" class="form-control form-control-sm" maxlength="30" placeholder="Código..." />
+                                    </div>
+                                    <div class="form-group col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                                        <label> Tipo </label>
+                                        <input type="text" formControlName="tipo" class="form-control form-control-sm" [value]="tipo_empresa" readonly />
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </ngb-tab>
+
+                        <ngb-tab title="Usuarios" *ngIf="modoEdicion">
+                            <ng-template ngbTabContent>
+                               <beatApp-listausuarios></beatApp-listausuarios>
+                            </ng-template>
+                        </ngb-tab>
+
+                        <ngb-tab title="Usuario de acceso" *ngIf="rol_empresa == 'Cliente' && !modoEdicion">
+                            <ng-template ngbTabContent>
+                                <div formGroupName="usuario">
+                                    <div class="row">
+                                        <div class="form-group col-lg-3">
+                                            <label class="col-lg-12 no-padding-left">
+                                                Asociar usuario
+                                            </label>
+                                            <div class="btn-group btn-group-toggle">
+                                                <label class="btn" [ngClass]="{ 'btn-success': asociarUsuario == true }" ngbButtonLabel>
+                                                    <input class="form-control form-control-sm" type="checkbox" ngbButton (change)="estadoAsociarUsuario(true)" />
+                                                    Sí
+                                                </label>
+                                                <label class="btn" [ngClass]="{ 'btn-danger': asociarUsuario == false }" ngbButtonLabel>
+                                                    <input class="form-control form-control-sm" type="checkbox" ngbButton (change)="estadoAsociarUsuario(false)" />
+                                                    No
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-9">
+                                            <label for="input-clave"> Clave de acceso </label>
+                                            <input type="password" id="input-clave" class="form-control form-control-sm" formControlName="clave" [disabled]="!asociarUsuario" [ngClass]="{
+                          'is-invalid text-danger':
+                            asociarUsuario &&
+                            mostrarErrores &&
+                            empresaForm.get('usuario').get('clave').invalid
+                        }" />
+                                            <span *ngIf="
+                          asociarUsuario &&
+                          mostrarErrores &&
+                          empresaForm.get('usuario').get('clave').invalid
+                        " class="text-small text-danger">
+                                                La clave de acceso es requerida y debe tener al menos 6
+                                                caracteres.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </ngb-tab>
+                        <ngb-tab title="{{ modoEdicion ? 'Dirección' : 'Localización' }}">
+                            <ng-template ngbTabContent>
+                                <beatForm-direccion [direccion]="direccion"
+                                    [conTipoLocalizacion]="!modoEdicion"
+                                    [tipoLocalizacion] = "null"
+                                    (formReady)="formDireccionInicializado('direccion', $event)"
+                                    [mostrarErrores]="mostrarErrores">
+                                </beatForm-direccion>
+                            </ng-template>
+                        </ngb-tab>
+
+                        <ngb-tab *ngIf="modoEdicion" title="Localizaciones">
+                            <ng-template ngbTabContent>
+                                <beatForm-localizaciones [empresa]="empresa" [localizaciones]="empresaLocalizaciones"></beatForm-localizaciones>
+                            </ng-template>
+                        </ngb-tab>
+                    </ngb-tabset>
+                    <hr />
+                    <button type="submit" class="btn btn-success float-right">
+                        <span *ngIf="!modoEdicion">
+                            Crear nuevo {{ rol_empresa | lowercase }}</span>
+                        <span *ngIf="modoEdicion"> Guardar cambios</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

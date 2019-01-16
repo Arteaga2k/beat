@@ -17,6 +17,7 @@ export class LoginPage implements OnInit {
 
   cargando: boolean = false;
   formulario: FormGroup;
+  foto_fondo: string;
 
   constructor(
     private fb: FormBuilder,
@@ -29,6 +30,8 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+
+    this.fondoLogin();
 
     this.formulario = this.fb.group({
       email: ['', [Validators.required, EmailValidator]],
@@ -71,6 +74,11 @@ export class LoginPage implements OnInit {
       });
     }
     return false;
+  }
+
+  fondoLogin() {
+    const numero_aleatorio = Math.floor(Math.random() * 3 + 1);
+    this.foto_fondo = 'url("/assets/images/login/login' + numero_aleatorio + '.jpg")';
   }
 
 }

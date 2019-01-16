@@ -8,22 +8,9 @@ import { IonicModule } from '@ionic/angular';
 import { LoginPage } from './login/login.page';
 import { SeleccionLocalizacionComponent } from './seleccion-localizacion/seleccion-localizacion.component';
 import { MatButtonModule, MatCheckboxModule, MatProgressBarModule, MatIconModule, MatInputModule, MatCardModule } from '@angular/material';
+import { SeguridadRoutingModule } from './seguridad-routing.module';
 
 
-
-const routes: Routes = [
-  {
-    path: '',
-    component: LoginPage
-  },
-  {
-    path: 'login',
-    component: LoginPage
-  },{
-    path: 'seleccion_localizacion',
-    component: SeleccionLocalizacionComponent
-  }
-];
 
 @NgModule({
   imports: [
@@ -31,7 +18,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
+    SeguridadRoutingModule, 
     MatButtonModule,
     MatIconModule,
     MatInputModule,

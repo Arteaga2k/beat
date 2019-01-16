@@ -2,9 +2,12 @@ img {
     width: 50%;
 }
 
-/*ion-content.login_background {
- - --ion-background-color: #00247D;
-}*/
+ion-content {
+    --color: #fff;
+    --background:none;
+    background: url(/assets/images/login/login1.jpg) no-repeat 0 0;
+    background-size: cover;  
+}
 
 ion-input {
     --placeholder-color: white;
@@ -14,3 +17,8 @@ ion-input {
 .mat-form-field {
     display: block !important;
 }
+
+.login_background {
+    background-image: url('http://localhost:8100/assets/images/login/login1.jpg') !important;
+}
+

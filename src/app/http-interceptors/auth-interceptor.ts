@@ -39,8 +39,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return from(values).pipe(
       mergeMap(values => {     
 
-        var _loc = JSON.parse(values._localizacion);
-        console.log('xxxxxxx', _loc);
+        var _loc = JSON.parse(values._localizacion);        
 
         let newHeaders = req.headers
           .set('X-Auth', values._token)
@@ -50,7 +49,7 @@ export class AuthInterceptor implements HttpInterceptor {
           console.log('intercept', values);
 
           if (_loc) {
-           newHeaders = newHeaders.set('X-Location', _loc.getId().toString());
+           //newHeaders = newHeaders.set('X-Location', _loc.getId().toString());
           }
           const authReq = req.clone({ headers: newHeaders });
           return next.handle(authReq);        

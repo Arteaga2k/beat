@@ -1,0 +1,82 @@
+<ion-header>
+
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="secondary" *ngIf="modoBusqueda">
+      <ion-searchbar [(ngModel)]="textoBusqueda" showCancelButton cancelButtonText="Custom Cancel" (ionCancel)="cancelarBusqueda()"
+        (ionChange)="inputBusqueda()" (ionClear)="limpiaBusqueda()">
+      </ion-searchbar>
+    </ion-buttons>
+    <ion-buttons slot="secondary" *ngIf="!modoBusqueda">
+      <ion-button>
+      </ion-button>
+      <ion-button (click)="abrirBusqueda()">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Clientes</ion-title>
+    <ion-buttons slot="primary" *ngIf="!modoBusqueda">
+      <ion-button color="secondary">
+        <ion-icon slot="icon-only" name="more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<!-- <ion-content>
+    <ion-item-group *ngFor="let cliente of clientes" >   
+        <ion-item-sliding>
+          <ion-item>
+            <ion-label>
+              <h3>{{cliente.nombre}}</h3>
+              <p>
+                {{cliente.tipo}} &mdash; {{cliente.nombre}}: {{cliente.nombre}}
+              </p>
+            </ion-label>
+          </ion-item>
+          <ion-item-options>
+            <ion-item-option color="primary">
+              Editar
+            </ion-item-option>
+           
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-item-group>
+</ion-content> -->
+
+<ion-content>
+  <table mat-table [dataSource]="dataSource" matSort>
+
+
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="cif">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> CIF </th>
+      <td mat-cell *matCellDef="let element"> {{element.cif}} </td>
+    </ng-container>
+
+ 
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+ 
+    <ng-container matColumnDef="tipo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
+      <td mat-cell *matCellDef="let element"> {{element.tipo}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="clienteSeleccionado(row)"></tr>
+  </table>
+
+</ion-content> 
