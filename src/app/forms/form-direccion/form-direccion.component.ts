@@ -34,7 +34,7 @@ export class FormDireccionComponent implements OnInit {
       // Rellenamos los datos del formulario
       this._direccion = direccion;
       this.municipio_sin_poner = this._direccion.getMunicipioId();
-      this.direccionForm.patchValue({
+     /* this.direccionForm.patchValue({
         tipo_via_id: this._direccion.getTipoVia(),
         nombre_via: this._direccion.getNombreVia(),
         numero: this._direccion.getNumero(),
@@ -43,7 +43,7 @@ export class FormDireccionComponent implements OnInit {
         codigo_postal: this._direccion.getCodigoPostal(),
         provincia_id: this._direccion.getProvinciaId(),
         observaciones: this._direccion.getObservaciones()
-      });
+      });*/
     }
     this.obtenerMunicipios();
   }

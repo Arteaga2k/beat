@@ -39,7 +39,7 @@ export class FormAltaEmpresaComponent implements OnInit {
       });
     }
   }
-
+  tab = 'datos_personales_tab'; //mostramos el tab datos personales por defecto
   localizaciones = [];
   direccion: Direccion = null;
   modoEdicion = false;
@@ -271,16 +271,7 @@ export class FormAltaEmpresaComponent implements OnInit {
     claveControl.updateValueAndValidity();
   }
 
-  swipe(eType){
-    console.log(eType);
-    /*if(eType === this.SWIPE_ACTION.LEFT && this.selected > 0){
-      console.log("movin left")
-      this.selected--;
-    }
-    else if(eType === this.SWIPE_ACTION.RIGHT && this.selected < this.tab_num){
-      console.log("movin right")
-      this.selected++;
-    }*/
-   // console.log(this.selected)
+  mostrarTab(tab) {
+    this.tab = tab;
   }
 }

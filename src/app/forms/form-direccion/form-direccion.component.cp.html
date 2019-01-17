@@ -1,51 +1,48 @@
 <div [formGroup]="direccionForm">
-    <ion-row *ngIf="conTipoLocalizacion">
-        <ion-col size="12">
-            <mat-form-field>
-                <mat-select placeholder="" formControlName="tipo_localizacion">
-                    <mat-option *ngFor="let tipo_loc of tipos_localizacion" [value]="tipo_loc">
-                        {{ tipo_loc }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </ion-col>
-    </ion-row>
 
-    <ion-row>
-        <ion-col size="6">
-            <mat-form-field>
-                <mat-select placeholder="Seleccione tipo de vía..." formControlName="tipo_localizacion">
-                    <mat-option *ngFor="let tipo_via of tipos_via" [value]="tipo_via.getId()" required>
-                        {{ tipo_via.getNombre() }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-
-            <mat-error *ngIf="mostrarErrores && direccionForm.get('tipo_via_id').hasError('required')">
-                El campo tipo de vía es requerido.</mat-error>
-        </ion-col>
-
-        <ion-col size="6">
-            <mat-form-field>
-                <input matInput type="text" id="input-nombre-via" class="form-control form-control-sm" formControlName="nombre_via"
-                    [ngClass]="{'is-invalid text-danger border-danger': mostrarErrores && direccionForm.get('nombre_via').invalid  }" />
-                <mat-error *ngIf="mostrarErrores && direccionForm.get('nombre_via').hasError('required')">
-                    El campo nombre de vía es requerido.</mat-error>
-            </mat-form-field>
-        </ion-col>
-    </ion-row>
-
-    <ion-row>
-        <ion-col size="4"></ion-col>
-        <ion-col size="4"></ion-col>
-        <ion-col size="4"></ion-col>
-    </ion-row>
-</div>
-
-
-<!-- <div [formGroup]="direccionForm">
-
-    
+    <div class="row" *ngIf="conTipoLocalizacion">
+        <div class="form-group col-lg-12">
+            <label for="input-localizacion">
+                Tipo de Localización*
+            </label>
+            <select id="input-localizacion" class="form-control form-control-sm" formControlName="tipo_localizacion"
+                [ngClass]="{'is-invalid text-danger': mostrarErrores && !tipo_localizacion }">
+                <option value="" selected="true">Seleccione localización...</option>
+                <option *ngFor="let tipo_loc of tipos_localizacion" [value]="tipo_loc">
+                    {{ tipo_loc }}
+                </option>
+            </select>
+            <span *ngIf="mostrarErrores && !tipo_localizacion" class="text-small text-danger">
+                El campo tipo de localización es requerido.
+            </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-3 col-md-6">
+            <label for="input-tipo-via">
+                Tipo de vía*
+            </label>
+            <select class="form-control form-control-sm" id="input-tipo-via" formControlName="tipo_via_id" [ngClass]="{'is-invalid text-danger border-danger': mostrarErrores && direccionForm.get('tipo_via_id').invalid  }">
+                <option value="" selected="true">Seleccione tipo de vía...</option>
+                <option *ngFor="let tipo_via of tipos_via" [value]="tipo_via.getId()">
+                    {{ tipo_via.getNombre() }}
+                </option>
+            </select>
+            <span *ngIf="mostrarErrores && direccionForm.get('tipo_via_id').hasError('required')" class="text-small text-danger">
+                El campo tipo de vía es requerido.
+            </span>
+        </div>
+        <div class="form-group col-lg-9 col-md-6">
+            <label for="input-nombre-via">
+                Nombre de vía*
+            </label>
+            <input type="text" id="input-nombre-via" class="form-control form-control-sm" formControlName="nombre_via"
+                [ngClass]="{'is-invalid text-danger border-danger': mostrarErrores && direccionForm.get('nombre_via').invalid  }" />
+            <span *ngIf="mostrarErrores && direccionForm.get('nombre_via').hasError('required')" class="text-small text-danger">
+                El campo nombre de vía es requerido.
+            </span>
+        </div>
+    </div>
     <div class="row">
         <div class="form-group col-lg-4">
             <label for="input-numero">
@@ -124,4 +121,4 @@
             <textarea class="form-control" rows="5" formControlName="observaciones"></textarea>
         </div>
     </div>
-</div> -->
+</div>

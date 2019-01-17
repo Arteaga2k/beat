@@ -1,144 +1,171 @@
 <form [formGroup]="empresaForm" (ngSubmit)="guardarEmpresa()">
-    <mat-tab-group animationDuration="1000ms" (swipeleft)="swipe($event.type)">
-        <mat-tab label="Datos personales">
-            <ion-row>
-                <ion-col size="8">
-                    <mat-form-field>
-                        <input matInput type="text" id="input-nombre" class="form-control form-control-sm"
-                            formControlName="nombre" placeholder="Nombre..." [ngClass]="{
-                                'is-invalid text-danger border-danger':
-                                mostrarErrores && empresaForm.get('nombre').invalid
-                            }"
-                            required />
-                        <mat-error *ngIf="mostrarErrores &&
-                            empresaForm.get('nombre').invalid &&
-                            empresaForm.get('nombre').hasError('required')">
-                            El campo nombre es requerido.</mat-error>
-                    </mat-form-field>
-                </ion-col>
+    <ion-tab-bar slot="top" color="primary">
+        <ion-tab-button (click)="mostrarTab('datos_personales_tab')" tab="null">
+            <ion-icon name="contact"></ion-icon>
+            <ion-label>Datos personales</ion-label>
+        </ion-tab-button>
 
-                <ion-col size="4">
-                    <mat-form-field>
-                        <input matInput type="text" formControlName="cif" id="input-cif" class="form-control form-control-sm"
-                            maxlength="9" placeholder="CIF/NIF..." [ngClass]="{
+        <ion-tab-button (click)="mostrarTab('lista_usuarios_tab')" tab="null">
+            <ion-icon name="contacts"></ion-icon>
+            <ion-label>Usuarios</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button (click)="mostrarTab('usuario_acceso_tab')" tab="null" *ngIf="rol_empresa == 'Cliente' && !modoEdicion">
+            <ion-icon name="key"></ion-icon>
+            <ion-label>Usuario de acceso</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button (click)="mostrarTab('direccion_tab')" tab="null">
+            <ion-icon name="map"></ion-icon>
+            <ion-label> {{ modoEdicion ? 'Dirección' : 'Localización' }}</ion-label>
+        </ion-tab-button>
+        <ion-tab-button (click)="mostrarTab('lista_localizaciones_tab')" tab="null" *ngIf="modoEdicion">
+            <ion-icon name="business"></ion-icon>
+            <ion-label> Localizaciones</ion-label>
+        </ion-tab-button>
+    </ion-tab-bar>
+
+
+
+
+
+
+    <ng-container *ngIf="tab === 'datos_personales_tab'">
+        <ion-row>
+            <ion-col size="8">
+                <mat-form-field>
+                    <input matInput type="text" id="input-nombre" class="form-control form-control-sm" formControlName="nombre"
+                        placeholder="Nombre..." [ngClass]="{
+                        'is-invalid text-danger border-danger':
+                        mostrarErrores && empresaForm.get('nombre').invalid
+                    }"
+                        required />
+                    <mat-error *ngIf="mostrarErrores &&
+                    empresaForm.get('nombre').invalid &&
+                    empresaForm.get('nombre').hasError('required')">
+                        El campo nombre es requerido.</mat-error>
+                </mat-form-field>
+            </ion-col>
+
+            <ion-col size="4">
+                <mat-form-field>
+                    <input matInput type="text" formControlName="cif" id="input-cif" class="form-control form-control-sm"
+                        maxlength="9" placeholder="CIF/NIF..." [ngClass]="{
+                        'is-invalid text-danger':
+                        mostrarErrores && empresaForm.get('cif').invalid
+                    }" />
+
+                    <mat-error *ngIf="mostrarErrores &&
+                empresaForm.get('cif').hasError('required')">
+                        El campo CIF/NIF es requerido.
+                    </mat-error>
+
+                    <mat-error *ngIf="mostrarErrores &&
+                    empresaForm.get('cif').hasError('invalidCifNif')">
+                        El campo CIF/NIF no es válido.
+                    </mat-error>
+                </mat-form-field>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="6">
+                <mat-form-field>
+                    <input matInput type="email" formControlName="email" class="form-control form-control-sm"
+                        placeholder="Email..." [ngClass]="{
                                 'is-invalid text-danger':
-                                mostrarErrores && empresaForm.get('cif').invalid
-                            }" />
+                                  mostrarErrores && empresaForm.get('email').invalid}"
+                        required />
+                    <mat-error *ngIf="mostrarErrores &&
+                    empresaForm.get('email').hasError('required')">
+                        El campo email es requerido.</mat-error>
 
-                        <mat-error *ngIf="mostrarErrores &&
-                        empresaForm.get('cif').hasError('required')">
-                            El campo CIF/NIF es requerido.
-                        </mat-error>
-
-                        <mat-error *ngIf="mostrarErrores &&
-                            empresaForm.get('cif').hasError('invalidCifNif')">
-                            El campo CIF/NIF no es válido.
-                        </mat-error>
-                    </mat-form-field>
-                </ion-col>
-            </ion-row>
-
-            <ion-row>
-                <ion-col size="6">
-                    <mat-form-field>
-                        <input matInput type="email" formControlName="email" class="form-control form-control-sm"
-                            placeholder="Email..." [ngClass]="{
-                                        'is-invalid text-danger':
-                                          mostrarErrores && empresaForm.get('email').invalid}"
-                            required />
-                        <mat-error *ngIf="mostrarErrores &&
-                            empresaForm.get('email').hasError('required')">
-                            El campo email es requerido.</mat-error>
-
-                        <mat-error *ngIf="mostrarErrores &&
-                                empresaForm.get('email').hasError('email')">
-                            El email introducido no es válido.</mat-error>
+                    <mat-error *ngIf="mostrarErrores &&
+                        empresaForm.get('email').hasError('email')">
+                        El email introducido no es válido.</mat-error>
 
 
-                    </mat-form-field>
-                </ion-col>
+                </mat-form-field>
+            </ion-col>
 
-                <ion-col size="6">
-                    <mat-form-field>
-                        <input matInput type="tel" formControlName="telefono" class="form-control form-control-sm"
-                            maxlength="20" placeholder="Teléfono..." [ngClass]="{
-                                    'is-invalid text-danger':
-                                      mostrarErrores && empresaForm.get('telefono').invalid
-                                  }"
-                            required />
+            <ion-col size="6">
+                <mat-form-field>
+                    <input matInput type="tel" formControlName="telefono" class="form-control form-control-sm"
+                        maxlength="20" placeholder="Teléfono..." [ngClass]="{
+                            'is-invalid text-danger':
+                              mostrarErrores && empresaForm.get('telefono').invalid
+                          }"
+                        required />
 
-                        <mat-error *ngIf="mostrarErrores &&
-                                  empresaForm.get('telefono').hasError('required')">
-                            El campo teléfono es requerido.</mat-error>
-                    </mat-form-field>
-                </ion-col>
-            </ion-row>
+                    <mat-error *ngIf="mostrarErrores &&
+                          empresaForm.get('telefono').hasError('required')">
+                        El campo teléfono es requerido.</mat-error>
+                </mat-form-field>
+            </ion-col>
+        </ion-row>
 
-            <ion-row>
-                <ion-col size="6">
-                    <mat-form-field>
-                        <input matInput type="text" formControlName="fax" class="form-control form-control-sm"
-                            maxlength="20" placeholder="FAX..." />
-                    </mat-form-field>
-                </ion-col>
-                <ion-col size="6">
-                    <mat-form-field>
-                        <input matInput type="text" formControlName="codigo" class="form-control form-control-sm"
-                            maxlength="30" placeholder="Código..." />
-                    </mat-form-field>
-                </ion-col>
-            </ion-row>
+        <ion-row>
+            <ion-col size="6">
+                <mat-form-field>
+                    <input matInput type="text" formControlName="fax" class="form-control form-control-sm" maxlength="20"
+                        placeholder="FAX..." />
+                </mat-form-field>
+            </ion-col>
+            <ion-col size="6">
+                <mat-form-field>
+                    <input matInput type="text" formControlName="codigo" class="form-control form-control-sm" maxlength="30"
+                        placeholder="Código..." />
+                </mat-form-field>
+            </ion-col>
+        </ion-row>
 
-            <ion-row>
-                <ion-col size="3">
-                    <mat-form-field appearance="fill">
-                        <input matInput type="text" formControlName="tipo" class="form-control form-control-sm" [value]="tipo_empresa"
-                            readonly />
+        <ion-row>
+            <ion-col size="3">
+                <mat-form-field appearance="fill">
+                    <input matInput type="text" formControlName="tipo" class="form-control form-control-sm" [value]="tipo_empresa"
+                        readonly />
 
-                    </mat-form-field>
-                </ion-col>
-            </ion-row>
+                </mat-form-field>
+            </ion-col>
+        </ion-row>
+    </ng-container>
 
+    <ng-container *ngIf="tab === 'lista_usuarios_tab'">
+        <!--  <beatApp-listausuarios></beatApp-listausuarios> -->
+    </ng-container>
 
-        </mat-tab>
-        <mat-tab label="Usuarios" *ngIf="modoEdicion">
-            <!--  <beatApp-listausuarios></beatApp-listausuarios> -->
-        </mat-tab>
-        <mat-tab label="Usuario de acceso" *ngIf="rol_empresa == 'Cliente' && !modoEdicion">
-            <ion-row formGroupName="usuario">
-                <ion-col size="8">
-                    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-                        <mat-button-toggle value="bold">Bold</mat-button-toggle>
-                        <mat-button-toggle value="italic">Italic</mat-button-toggle>
-                        <mat-button-toggle value="underline">Underline</mat-button-toggle>
-                    </mat-button-toggle-group>
-                </ion-col>
-                <ion-col>
-                    <mat-form-field>
-                        <input matInput type="password" id="input-clave" class="form-control form-control-sm"
-                            formControlName="clave" [disabled]="!asociarUsuario" [ngClass]="{
+    <ng-container *ngIf="tab === 'usuario_acceso_tab'">
+        <ion-row formGroupName="usuario">
+            <ion-col size="8">
+                <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+                    <mat-button-toggle value="bold">Bold</mat-button-toggle>
+                    <mat-button-toggle value="italic">Italic</mat-button-toggle>
+                    <mat-button-toggle value="underline">Underline</mat-button-toggle>
+                </mat-button-toggle-group>
+            </ion-col>
+            <ion-col>
+                <mat-form-field>
+                    <input matInput type="password" id="input-clave" class="form-control form-control-sm"
+                        formControlName="clave" [disabled]="!asociarUsuario" [ngClass]="{
                                     'is-invalid text-danger':
                                       asociarUsuario &&
                                       mostrarErrores &&
                                       empresaForm.get('usuario').get('clave').invalid
                                   }" />
-                    </mat-form-field>
-                </ion-col>
-            </ion-row>
-        </mat-tab>
+                </mat-form-field>
+            </ion-col>
+        </ion-row>
+    </ng-container>
 
-        <mat-tab label="{{ modoEdicion ? 'Dirección' : 'Localización' }}">
-            <!-- <beatForm-direccion [direccion]="direccion" [conTipoLocalizacion]="!modoEdicion" [tipoLocalizacion]="null" (formReady)="formDireccionInicializado('direccion', $event)" [mostrarErrores]="mostrarErrores">
-                        </beatForm-direccion> -->
+    <ng-container *ngIf="tab === 'direccion_tab'">
+        <beatForm-direccion [direccion]="direccion" [conTipoLocalizacion]="!modoEdicion" [tipoLocalizacion]="null"
+            (formReady)="formDireccionInicializado('direccion', $event)" [mostrarErrores]="mostrarErrores">
+        </beatForm-direccion>
+    </ng-container>
 
-        </mat-tab>
+    <ng-container *ngIf="tab === 'lista_localizaciones_tab'">
+        <!--  <beatForm-localizaciones [empresa]="empresa" [localizaciones]="empresaLocalizaciones"></beatForm-localizaciones> -->
+    </ng-container>
 
-        <mat-tab label="Localizaciones" *ngIf="modoEdicion">
 
-        </mat-tab>
-
-        <mat-tab label="Localizaciones" *ngIf="modoEdicion" >
-           <!--  <beatForm-localizaciones [empresa]="empresa" [localizaciones]="empresaLocalizaciones"></beatForm-localizaciones> -->
-        </mat-tab>
-    </mat-tab-group>
 </form>

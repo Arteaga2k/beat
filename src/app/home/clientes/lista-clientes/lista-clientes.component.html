@@ -48,8 +48,10 @@
       </ion-item-group>
 </ion-content> -->
 
-<ion-content>
-  <table mat-table [dataSource]="dataSource" matSort>
+<ion-content [scrollEvents]="true" (ionScroll)="scrolling($event)">
+    
+
+  <table mat-table [dataSource]="dataSource" matSort>      
 
 
     <ng-container matColumnDef="nombre">
@@ -78,5 +80,11 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="clienteSeleccionado(row)"></tr>
   </table>
+
+  <ion-fab vertical="bottom"  horizontal="end" slot="fixed" [routerLink]="'/gestion/clientes/crear'" routerDirection="forward">
+      <ion-fab-button >
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 
 </ion-content> 
