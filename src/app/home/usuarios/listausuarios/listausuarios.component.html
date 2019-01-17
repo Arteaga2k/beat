@@ -1,0 +1,109 @@
+
+<ion-content [scrollEvents]="true" (ionScroll)="scrolling($event)">
+    
+
+    <table mat-table [dataSource]="dataSource" matSort>      
+  
+  
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="cargo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cargo </th>
+        <td mat-cell *matCellDef="let element"> {{element.cargo}} </td>
+      </ng-container>  
+   
+      <ng-container matColumnDef="activo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Activo </th>
+          <td mat-cell *matCellDef="let element">            
+            <span *ngIf="element.isActivo() == true" class="badge badge-success">Activo</span>
+            <span *ngIf="element.isActivo() == false" class="badge badge-danger">Inactivo</span>
+          </td>
+        </ng-container>  
+     
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="clienteSeleccionado(row)"></tr>
+    </table>
+  
+    <ion-fab vertical="bottom"  horizontal="end" slot="fixed" [routerLink]="'/gestion/clientes/crear'" routerDirection="forward">
+        <ion-fab-button >
+            <ion-icon name="add"></ion-icon>
+          </ion-fab-button>
+      </ion-fab>
+  
+  </ion-content> 
+
+
+
+<!-- <p-table #dt [paginator]="paginar" [rows]="itemspag" [loading]="loading"
+    [rowsPerPageOptions]="opcionesItems" [responsive]="true" alwaysShowPaginator="false"
+    [value]="usuarios" [globalFilterFields]="['nombre', 'email', 'cargo']">
+    <ng-template pTemplate="header">
+        <tr>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field" [style.width]="col.width"
+                [class]="'beat-wrap ' + col.class">
+                <i *ngIf="col.icon" [ngClass]="col.icon"></i>
+                {{ col.header }}
+                <p-sortIcon *ngIf="col.field" [field]="col.field" ariaLabel="Activate to sort"
+                    ariaLabelDesc="Activate to sort in descending order"
+                    ariaLabelAsc="Activate to sort in ascending order">
+                </p-sortIcon>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user let-rowData>
+        <tr class="turbotable-tr">
+            <td [class]="'text-justify beat-wrap ' + prioridades.nombre">
+                <span class="ui-column-title">Nombre</span>
+                <img class="table-logo" [src]="rutaImgs + user.getFoto()" *ngIf="user.getFoto()" />
+                <img class="table-logo" [src]="noImg" *ngIf="!user.getFoto()" />
+                {{ user.getNombre() }}
+            </td>
+            <td [class]="'beat-wrap ' + prioridades.email">
+                <span class="ui-column-title">Email</span>
+                {{ user.getEmail() }}
+            </td>
+            <td [class]="'beat-wrap ' + prioridades.cargo">
+                <span class="ui-column-title">Cargo</span>
+                {{ user.getCargo() }}
+            </td>
+            <td [class]="'beat-wrap ' + prioridades.activo">
+                <span class="ui-column-title">Activo</span>
+                <span *ngIf="user.isActivo() == true" class="badge badge-success">Activo</span>
+                <span *ngIf="user.isActivo() == false" class="badge badge-danger">Inactivo</span>
+            </td>
+            <td [class]="'beat-wrap ' + prioridades.acciones">
+                <span class="ui-column-title">Acciones</span>
+                <button type="button" class="btn btn-sm btn-primary btn-inverse-light" (click)="irUsuario([user.getId()])">
+                    <span class="fa fa-pencil-square-o text-primary"></span>
+                </button>
+                <button type="button" class="btn btn-sm btn-danger btn-inverse-light" (click)="bajaUsuario(user.getId())"
+                    style="margin-left:6px;" *ngIf="user.isActivo()">
+                    <span class="fa fa-trash-o text-danger"></span>
+                </button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td class="emptymessage">
+                <i class="fa fa-lg fa-warning text-warning"></i>
+                &nbsp; {{ sinDatos }}
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <span *ngIf="usuarios.length > 10" class="float-right">Usuarios por página</span>
+        {{ usuarios?.length }} usuarios
+    </ng-template>
+</p-table>
+<div id="confirm-bajausuario" hidden (click)="bajaUsuarioConfirmada()"></div>
+ -->

@@ -26,6 +26,11 @@ export class AppComponent {
       icon: 'list'
     },
     {
+      title: 'Usuarios',
+      url: '/gestion/usuarios/listar',
+      icon: 'list'
+    },
+    {
       title: 'Proveedores',
       url: '/proveedores',
       icon: 'people'

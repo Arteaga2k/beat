@@ -35,11 +35,7 @@
             <ion-col size="8">
                 <mat-form-field>
                     <input matInput type="text" id="input-nombre" class="form-control form-control-sm" formControlName="nombre"
-                        placeholder="Nombre..." [ngClass]="{
-                        'is-invalid text-danger border-danger':
-                        mostrarErrores && empresaForm.get('nombre').invalid
-                    }"
-                        required />
+                        placeholder="Nombre" required />
                     <mat-error *ngIf="mostrarErrores &&
                     empresaForm.get('nombre').invalid &&
                     empresaForm.get('nombre').hasError('required')">
@@ -49,11 +45,8 @@
 
             <ion-col size="4">
                 <mat-form-field>
-                    <input matInput type="text" formControlName="cif" id="input-cif" class="form-control form-control-sm"
-                        maxlength="9" placeholder="CIF/NIF..." [ngClass]="{
-                        'is-invalid text-danger':
-                        mostrarErrores && empresaForm.get('cif').invalid
-                    }" />
+                    <input matInput type="text" formControlName="cif" id="input-cif" 
+                        maxlength="9" placeholder="CIF/NIF" />
 
                     <mat-error *ngIf="mostrarErrores &&
                 empresaForm.get('cif').hasError('required')">
@@ -71,10 +64,8 @@
         <ion-row>
             <ion-col size="6">
                 <mat-form-field>
-                    <input matInput type="email" formControlName="email" class="form-control form-control-sm"
-                        placeholder="Email..." [ngClass]="{
-                                'is-invalid text-danger':
-                                  mostrarErrores && empresaForm.get('email').invalid}"
+                    <input matInput type="email" formControlName="email" 
+                        placeholder="Email"
                         required />
                     <mat-error *ngIf="mostrarErrores &&
                     empresaForm.get('email').hasError('required')">
@@ -90,13 +81,9 @@
 
             <ion-col size="6">
                 <mat-form-field>
-                    <input matInput type="tel" formControlName="telefono" class="form-control form-control-sm"
-                        maxlength="20" placeholder="Teléfono..." [ngClass]="{
-                            'is-invalid text-danger':
-                              mostrarErrores && empresaForm.get('telefono').invalid
-                          }"
+                    <input matInput type="tel" formControlName="telefono" 
+                        maxlength="20" placeholder="Teléfono"
                         required />
-
                     <mat-error *ngIf="mostrarErrores &&
                           empresaForm.get('telefono').hasError('required')">
                         El campo teléfono es requerido.</mat-error>
@@ -107,14 +94,14 @@
         <ion-row>
             <ion-col size="6">
                 <mat-form-field>
-                    <input matInput type="text" formControlName="fax" class="form-control form-control-sm" maxlength="20"
-                        placeholder="FAX..." />
+                    <input matInput type="text" formControlName="fax"  maxlength="20"
+                        placeholder="FAX" />
                 </mat-form-field>
             </ion-col>
             <ion-col size="6">
                 <mat-form-field>
-                    <input matInput type="text" formControlName="codigo" class="form-control form-control-sm" maxlength="30"
-                        placeholder="Código..." />
+                    <input matInput type="text" formControlName="codigo" maxlength="30"
+                        placeholder="Código" />
                 </mat-form-field>
             </ion-col>
         </ion-row>
@@ -122,7 +109,7 @@
         <ion-row>
             <ion-col size="3">
                 <mat-form-field appearance="fill">
-                    <input matInput type="text" formControlName="tipo" class="form-control form-control-sm" [value]="tipo_empresa"
+                    <input matInput type="text" formControlName="tipo"  [value]="tipo_empresa"
                         readonly />
 
                 </mat-form-field>
@@ -136,11 +123,13 @@
 
     <ng-container *ngIf="tab === 'usuario_acceso_tab'">
         <ion-row formGroupName="usuario">
-            <ion-col size="8">
-                <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-                    <mat-button-toggle value="bold">Bold</mat-button-toggle>
-                    <mat-button-toggle value="italic">Italic</mat-button-toggle>
-                    <mat-button-toggle value="underline">Underline</mat-button-toggle>
+            <ion-col size="6">
+                <h3>Asociar usuario:</h3>                
+            </ion-col>
+            <ion-col size="6">
+                <mat-button-toggle-group  #group="matButtonToggleGroup" appearance="legacy" name="fontStyle" aria-label="Font Style">
+                    <mat-button-toggle value="si" color="primary" (change)="estadoAsociarUsuario(true)">Sí</mat-button-toggle>
+                    <mat-button-toggle value="no" color="accent" (change)="estadoAsociarUsuario(false)">No</mat-button-toggle>                 
                 </mat-button-toggle-group>
             </ion-col>
             <ion-col>
