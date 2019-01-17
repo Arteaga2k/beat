@@ -1,5 +1,3 @@
-import { Deserializable } from './deserializable';
-
 export class TipoVia {
 
     private id: number;

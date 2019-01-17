@@ -12,9 +12,8 @@ export class LocalizacionService {
 
     constructor(private http: HttpClient) { }
 
-    getTiposLocalizacion(token: string): Observable<any> {
-        let url = environment.servidor + 'localizaciones/listaTiposLocalizacion';
-        url += '?token=' + token;
+    getTiposLocalizacion(): Observable<any> {
+        let url = environment.servidor + 'localizaciones/listaTiposLocalizacion';       
         return this.http.get<String[]>(url);
     }
 

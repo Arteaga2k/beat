@@ -14,9 +14,8 @@ export class DireccionService {
 
     constructor(private http: HttpClient) { }
 
-    getTiposVia(token: string): Observable<any> {
-        let url = environment.servidor + 'direcciones/listaTiposVia';
-        url += '?token=' + token;
+    getTiposVia(): Observable<any> {
+        let url = environment.servidor + 'direcciones/listaTiposVia';     
         return this.http.get<TipoVia[]>(url).pipe(
             map((data: any) => {
                 const tipos_via: TipoVia[] = [];
@@ -27,9 +26,8 @@ export class DireccionService {
             }), catchError(this.handleError));
     }
 
-    getProvincias(token: string): Observable<any> {
-        let url = environment.servidor + 'direcciones/listaProvincias';
-        url += '?token=' + token;
+    getProvincias(): Observable<any> {
+        let url = environment.servidor + 'direcciones/listaProvincias';       
         return this.http.get(url).pipe(
             map((data: any) => {
                 const provincias: Provincia[] = [];
@@ -40,9 +38,8 @@ export class DireccionService {
             }), catchError(this.handleError));
     }
 
-    getMunicipios(token: string, provincia: number): Observable<any> {
-        let url = environment.servidor + 'direcciones/listaMunicipios/' + provincia;
-        url += '?token=' + token;
+    getMunicipios(provincia: number): Observable<any> {
+        let url = environment.servidor + 'direcciones/listaMunicipios/' + provincia;      
         return this.http.get<Municipio[]>(url).pipe(
             map((data: any) => {
                 const municipios: Municipio[] = [];

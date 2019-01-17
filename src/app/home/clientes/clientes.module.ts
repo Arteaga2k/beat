@@ -12,6 +12,7 @@ import { MatSortModule } from '@angular/material';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { EditarClientesComponent } from './editar-clientes/editar-clientes.component';
+import { CustomFormModule } from 'src/app/forms/custom.form.module';
 
 
 
@@ -23,7 +24,8 @@ import { EditarClientesComponent } from './editar-clientes/editar-clientes.compo
     IonicModule,
     MatTableModule,
     MatSortModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    CustomFormModule
     
   ],
   providers: [ ],

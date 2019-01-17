@@ -4,6 +4,7 @@ import { Empresa } from 'src/app/classes/empresa';
 import { ActivatedRoute } from '@angular/router';
 import { EmpresaService } from 'src/app/services/api/empresa.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { MenuController } from '@ionic/angular';
 
 
 @Component({
@@ -19,8 +20,11 @@ export class EditarClientesComponent implements OnInit {
   constructor(
     private empresasSvc: EmpresaService,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar ,
+    private menuCtrl: MenuController
   ) {
+    this.menuCtrl.enable(false);
+   
   }
 
   ngOnInit() {

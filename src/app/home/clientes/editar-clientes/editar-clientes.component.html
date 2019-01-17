@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header>    
 
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
@@ -7,19 +7,20 @@
     </ion-buttons>
     
     <ion-buttons slot="secondary" *ngIf="!modoBusqueda">
-        
+        <ion-back-button [text]="buttonText" [icon]="buttonIcon">
+          </ion-back-button>
     </ion-buttons>
 
     <ion-title>Editando cliente {{ cliente != null ? cliente.getNombre() : '' }}</ion-title>
-    <ion-buttons slot="primary" *ngIf="!modoBusqueda">
+    <ion-buttons slot="primary" *ngIf="!modoBusqueda">     
       <ion-button color="secondary">
         <ion-icon slot="icon-only" name="more"></ion-icon>
       </ion-button>
     </ion-buttons>
-  </ion-toolbar>
+  </ion-toolbar> 
 
 </ion-header>
 
-<ion-content padding>
-<!--     <beatForm-alta-empresa [empresa]="cliente" rol_empresa="Cliente" redireccion="clientes"></beatForm-alta-empresa>
- --></ion-content>
+<ion-content>
+     <beatForm-alta-empresa [empresa]="cliente" rol_empresa="Cliente" redireccion="clientes"></beatForm-alta-empresa>
+ </ion-content>

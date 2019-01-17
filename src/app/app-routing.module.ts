@@ -7,7 +7,7 @@ import { HomeModule } from './home/home.module';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/clientes',
+    redirectTo: '/gestion',
     pathMatch: 'full'
   },
   {

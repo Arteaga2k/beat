@@ -44,7 +44,7 @@ export class FormAltaEmpresaComponent implements OnInit {
   direccion: Direccion = null;
   modoEdicion = false;
   asociarUsuario = false;
-  mostrarErrores = false;
+  mostrarErrores = false; 
   empresaForm: FormGroup;
   contactos: FormArray;
   tipo_empresa: String = '';
@@ -269,5 +269,18 @@ export class FormAltaEmpresaComponent implements OnInit {
       ]);
     }
     claveControl.updateValueAndValidity();
+  }
+
+  swipe(eType){
+    console.log(eType);
+    /*if(eType === this.SWIPE_ACTION.LEFT && this.selected > 0){
+      console.log("movin left")
+      this.selected--;
+    }
+    else if(eType === this.SWIPE_ACTION.RIGHT && this.selected < this.tab_num){
+      console.log("movin right")
+      this.selected++;
+    }*/
+   // console.log(this.selected)
   }
 }
