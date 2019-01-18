@@ -8,7 +8,8 @@
 <mat-progress-bar mode="query" color="accent" *ngIf="cargando"></mat-progress-bar>
 
 <ion-content padding class="bg-image">
-  <ion-row>
+
+  <ion-row style="padding-top: 5vh;padding-bottom: 5vh;">
     <ion-img class="center" style="width: 50%;" src="/assets/images/beat_logo_transparente.png"></ion-img>
   </ion-row>
 
@@ -18,9 +19,9 @@
     </mat-card-header>
     <mat-card-content>
       <form [formGroup]="formulario" (ngSubmit)="acceder()">
-        <ion-row>
+        <ion-row >
           <ion-col size="12">
-            <mat-form-field class="example-form-field">
+            <mat-form-field>
               <input matInput type="text" placeholder="Email..." formControlName="email" required>
               <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="formulario.email=''">
                 <mat-icon>close</mat-icon>

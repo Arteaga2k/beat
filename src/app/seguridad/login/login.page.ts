@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef } from '@angular/core';
 import { FormGroup, Validators, EmailValidator, FormBuilder } from '@angular/forms';
 import { LoginService } from 'src/app/services/api/login.service';
 import { Router } from '@angular/router';
@@ -15,6 +15,8 @@ import { forkJoin } from 'rxjs';
 })
 export class LoginPage implements OnInit {
 
+  private fabRef;
+
   cargando: boolean = false;
   formulario: FormGroup;
   foto_fondo: string;
@@ -24,7 +26,9 @@ export class LoginPage implements OnInit {
     private loginService: LoginService,
     private router: Router,
     private storage: Storage,
-    private menuCtrl: MenuController
+    private menuCtrl: MenuController,
+    private element: ElementRef,
+    private renderer: Renderer2
   ) {
     this.menuCtrl.enable(false);
   }
@@ -40,6 +44,16 @@ export class LoginPage implements OnInit {
     });
 
     this.storage.clear();
+  }
+
+
+  ngAfterViewInit() {
+
+    this.fabRef = this.element.nativeElement; //.querySelectorAll("ion-page");
+    console.log(' fabref ', this.fabRef);
+
+   // this.fabRef = this.element.nativeElement.querySelectorAll("ion-fab")[0];
+    this.renderer.setStyle(this.fabRef, 'background', 'url(/assets/images/login/login1.jpg) no-repeat 0 0');
   }
 
   acceder() {

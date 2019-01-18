@@ -13,7 +13,7 @@ import { NavController, IonFab, IonFabButton } from '@ionic/angular';
 export class ListaClientesComponent implements OnInit {
 
 
-
+  cargando: boolean = false;
   clientes: Empresa[] = [];
   displayedColumns: string[] = ['nombre', 'cif', 'email', 'tipo'];
   dataSource = null;
@@ -66,6 +66,8 @@ export class ListaClientesComponent implements OnInit {
 
   actualizarListaClientes() {
 
+    this.cargando = true;
+
     this.empresaSvc.getClientes().subscribe(
       data => {
         this.clientes = [];
@@ -86,6 +88,7 @@ export class ListaClientesComponent implements OnInit {
         console.log('data', this.clientes);
         this.dataSource = new MatTableDataSource<Empresa>(this.clientes);
         this.dataSource.sort = this.sort;
+        this.cargando = false;
       },
       err => {
         alert('error' + err);

@@ -4,9 +4,9 @@
 
 export const environment = {
   production  :  false,
-  servidor    :   /*'http://10.45.5.3:8000/api/'*/ 'http://localhost:8000/api/',
+  servidor    :   'http://10.45.7.60:8000/api/', // 'http://localhost:8000/api/',
   url_login   :  '/seguridad/login',
-  url_home    :  '/clientes', //todo cambiar a home
+  url_home    :  '/gestion/clientes/listar', //todo cambiar a home
   no_image    :  'assets/images/no-image.png'
 };
 

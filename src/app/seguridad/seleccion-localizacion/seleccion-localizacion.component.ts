@@ -15,6 +15,7 @@ export class SeleccionLocalizacionComponent implements OnInit {
 
   token: string;
   localizaciones: Array<Localizacion>;
+  cargando: boolean = false;
 
   constructor(
     private storage: Storage,
@@ -49,6 +50,7 @@ export class SeleccionLocalizacionComponent implements OnInit {
 
   cargaLocalizaciones() {
     // Obtenemos las localizaciones con permisos
+    this.cargando = true;
     this.localizaciones = new Array();
     this.storage.get("usuario").then((usuario) => {
       console.log(' usuario ', usuario);
@@ -56,6 +58,7 @@ export class SeleccionLocalizacionComponent implements OnInit {
       this.loginService.getLocalizacionesUsuario(JSON.parse(usuario)).subscribe(
         data => {
           this.localizaciones = data;
+          this.cargando = false;
         },
         err => {
           alert('error' + err);

@@ -1,7 +1,12 @@
-<ion-content padding>
-    <ion-card *ngFor="let localizacion of localizaciones" 
-                [ngStyle]="{'border-left': '20px solid', 'color': estiloBorde(localizacion)['border-color']}"
-                (click)="seleccionar(localizacion)">
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title text-center>Selecciona localización</ion-title>
+    </ion-toolbar>
+</ion-header>
+<mat-progress-bar mode="query" color="accent" *ngIf="cargando"></mat-progress-bar>
+<!-- <ion-content>
+    <ion-card *ngFor="let localizacion of localizaciones" [ngStyle]="{'border-left': '20px solid', 'color': estiloBorde(localizacion)['border-color']}"
+        (click)="seleccionar(localizacion)">
         <ion-img [src]="'/assets/images/localizaciones/'+localizacion.getImagen()"></ion-img>
         <ion-card-header class="header_cabeceras">
             <h3>{{ localizacion.getNombre() }}</h3>
@@ -15,5 +20,7 @@
                 {{ localizacion.getDireccion().getDireccionTexto() }}
             </ion-card-subtitle>
         </ion-card-content>
-    </ion-card>   
-</ion-content>
+    </ion-card>
+</ion-content> -->
+
+<div class="card"></div>

@@ -5,8 +5,8 @@ img {
 ion-content {
     --color: #fff;
     --background:none;
-    background: url(/assets/images/login/login1.jpg) no-repeat 0 0;
-    background-size: cover;  
+   // background: url(/assets/images/login/login1.jpg) no-repeat  100% 100%;
+   // background-size: cover;  
 }
 
 ion-input {
@@ -19,6 +19,6 @@ ion-input {
 }
 
 .login_background {
-    background-image: url('http://localhost:8100/assets/images/login/login1.jpg') !important;
+   /* background-image: url('http://localhost:8100/assets/images/login/login1.jpg') !important;*/
 }
 

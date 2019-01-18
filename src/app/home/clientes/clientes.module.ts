@@ -13,6 +13,7 @@ import { MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { EditarClientesComponent } from './editar-clientes/editar-clientes.component';
 import { CustomFormModule } from 'src/app/forms/custom.form.module';
+import { MatProgressBarModule } from '@angular/material';
 
 
 
@@ -25,7 +26,8 @@ import { CustomFormModule } from 'src/app/forms/custom.form.module';
     MatTableModule,
     MatSortModule,
     MatSnackBarModule,
-    CustomFormModule
+    CustomFormModule,
+    MatProgressBarModule
     
   ],
   providers: [ ],
