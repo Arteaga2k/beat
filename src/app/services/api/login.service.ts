@@ -4,7 +4,6 @@ import { catchError, tap, map, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Localizacion } from '../../classes/localizacion';
 import { Observable, throwError, Observer, from } from 'rxjs';
-
 import { Storage } from '@ionic/storage';
 
 @Injectable({
@@ -16,7 +15,7 @@ export class LoginService {
     private http: HttpClient,
     private storage: Storage) { }
 
-  login(params) {    
+  login(params) {
 
     return this.http.post(environment.servidor + 'usuarios/login', params).pipe(
       map(data => {
@@ -25,10 +24,10 @@ export class LoginService {
       catchError(this.handleError));
   }
 
-  prueba(): Observable<any> {  
+  prueba(): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders(
-        {'Content-Type': 'application/json', 'x-auth': 'sdsdsdssd'})
+        { 'Content-Type': 'application/json', 'x-auth': 'sdsdsdssd' })
     };
 
     return this.http.get(environment.servidor + 'usuarios/1/localizacionesConPermisos').pipe(
@@ -40,18 +39,18 @@ export class LoginService {
   }
 
   getLocalizacionesUsuario(usuario: any): Observable<any> {
-    const url = environment.servidor + 'usuarios/' + usuario.id + '/localizacionesConPermisos';    
-       
+    const url = environment.servidor + 'usuarios/' + usuario.id + '/localizacionesConPermisos';
+
     return this.http.get(url)
       .pipe(
-        map(data => {       
+        map(data => {
 
           const localizaciones = [];
           for (const localizacion of data['data']) {
             localizaciones.push(new Localizacion(localizacion));
           }
-          
-          return localizaciones;      
+
+          return localizaciones;
         }),
         catchError(this.handleError));
 

@@ -20,16 +20,21 @@ export class EditarClientesComponent implements OnInit {
   constructor(
     private empresasSvc: EmpresaService,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar ,
-    private menuCtrl: MenuController
+    private snackBar: MatSnackBar,
+    private menuCtrl: MenuController,
+    private router: Router
   ) {
     this.menuCtrl.enable(false);
-   
+
   }
 
   ngOnInit() {
-       
+
     this.id_empresa = this.route.snapshot.paramMap.get('id');
+    this.obtenerCliente();
+  }
+
+  obtenerCliente() {
 
     this.empresasSvc.getCliente(this.id_empresa).subscribe(
       cliente => {
@@ -47,16 +52,17 @@ export class EditarClientesComponent implements OnInit {
 
         snackBarRef.afterDismissed().subscribe(info => {
           if (info.dismissedByAction === true) {
-            //todo hacer cosas            
-
+            //todo hacer cosas   
           }
         }
-
         );
-
-
       }
     );
+
+  }
+
+  volverClick() {
+    this.router.navigateByUrl('gestion/clientes/listar');
   }
 
 }

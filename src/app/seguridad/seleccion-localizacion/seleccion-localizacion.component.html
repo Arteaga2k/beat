@@ -3,8 +3,9 @@
         <ion-title text-center>Selecciona localización</ion-title>
     </ion-toolbar>
 </ion-header>
-<mat-progress-bar mode="query" color="accent" *ngIf="cargando"></mat-progress-bar>
-<!-- <ion-content>
+
+ <ion-content>
+    <mat-progress-bar mode="query" color="accent" *ngIf="cargando"></mat-progress-bar>
     <ion-card *ngFor="let localizacion of localizaciones" [ngStyle]="{'border-left': '20px solid', 'color': estiloBorde(localizacion)['border-color']}"
         (click)="seleccionar(localizacion)">
         <ion-img [src]="'/assets/images/localizaciones/'+localizacion.getImagen()"></ion-img>
@@ -21,6 +22,6 @@
             </ion-card-subtitle>
         </ion-card-content>
     </ion-card>
-</ion-content> -->
+</ion-content>
 
 <div class="card"></div>

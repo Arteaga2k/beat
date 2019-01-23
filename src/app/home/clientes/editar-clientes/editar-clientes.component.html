@@ -2,8 +2,11 @@
 
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button [text]="buttonText" [icon]="buttonIcon">
-      </ion-back-button>
+    <!--   <ion-back-button [text]="buttonText" [icon]="buttonIcon">
+      </ion-back-button> -->
+      <ion-button (click)="volverClick()">
+          <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+        </ion-button>
     </ion-buttons>
     
     <ion-buttons slot="secondary" *ngIf="!modoBusqueda">

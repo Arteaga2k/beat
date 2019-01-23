@@ -1,45 +1,88 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-buttons slot="secondary" *ngIf="modoBusqueda">
+            <ion-searchbar [(ngModel)]="textoBusqueda" showCancelButton cancelButtonText="Custom Cancel" (ionCancel)="cancelarBusqueda()"
+                (ionChange)="inputBusqueda()" (ionClear)="limpiaBusqueda()">
+            </ion-searchbar>
+        </ion-buttons>
+        <ion-buttons slot="secondary" *ngIf="!modoBusqueda">
+            <ion-button (click)="abrirBusqueda()">
+                <ion-icon slot="icon-only" name="search"></ion-icon>
+            </ion-button>
+        </ion-buttons>
 
-<ion-content [scrollEvents]="true" (ionScroll)="scrolling($event)">
-    
+        <ion-title>Usuarios</ion-title>
+        <ion-buttons slot="primary" *ngIf="!modoBusqueda">
 
-    <table mat-table [dataSource]="dataSource" matSort>      
-  
-  
-      <ng-container matColumnDef="nombre">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-      </ng-container>
-      
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-      </ng-container>
-      
-      <ng-container matColumnDef="cargo">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cargo </th>
-        <td mat-cell *matCellDef="let element"> {{element.cargo}} </td>
-      </ng-container>  
+            <ion-button (click)="presentPopover($event)">
+                <ion-icon slot="icon-only" name="funnel"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<mat-progress-bar mode="query" color="accent" *ngIf="cargando"></mat-progress-bar>
+
+
+<!-- <ion-virtual-scroll [items]="usuarios"> -->
+
+    <ion-list>
+
+            <ion-card *ngFor="let item of usuarios_filtrado">
+                    <ion-avatar class="imagen_cliente" slot="end" float-right>
+                        <img [src]="'/assets/images/localizaciones/almacen.jpg'" />
+                    </ion-avatar>
+                    <ion-card-header class="header_cabeceras">
+                        <b>
+                            <h3>{{ item.getNombre() }}</h3>
+                        </b>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-card-subtitle>
+                            <ion-icon name="information-circle" color="primary"></ion-icon> {{ item.getCargo() }}
+                        </ion-card-subtitle>
+                        <ion-card-subtitle>
+                            <ion-icon name="mail" color="primary"></ion-icon>
+                            {{ item.getEmail() }}
+                        </ion-card-subtitle>
+                    </ion-card-content>
+                </ion-card>
+    </ion-list>
+
+
+
    
-      <ng-container matColumnDef="activo">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Activo </th>
-          <td mat-cell *matCellDef="let element">            
-            <span *ngIf="element.isActivo() == true" class="badge badge-success">Activo</span>
-            <span *ngIf="element.isActivo() == false" class="badge badge-danger">Inactivo</span>
-          </td>
-        </ng-container>  
-     
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="clienteSeleccionado(row)"></tr>
+
+    <!-- <ion-item *virtualItem="let item">
+        {{ item.nombre }}
+    </ion-item> -->
+<!-- </ion-virtual-scroll> -->
+
+<!-- 
+<ion-content [scrollEvents]="true" (ionScroll)="scrolling($event)">
+
+
+    <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="{{column.id}}" *ngFor="let column of columnNames">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column.value}} </th>
+            <td mat-cell *matCellDef="let element"> {{element[column.id]}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
     </table>
-  
-    <ion-fab vertical="bottom"  horizontal="end" slot="fixed" [routerLink]="'/gestion/clientes/crear'" routerDirection="forward">
-        <ion-fab-button >
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
             <ion-icon name="add"></ion-icon>
-          </ion-fab-button>
-      </ion-fab>
-  
-  </ion-content> 
+        </ion-fab-button>
+    </ion-fab>
+
+</ion-content> -->
 
 
 

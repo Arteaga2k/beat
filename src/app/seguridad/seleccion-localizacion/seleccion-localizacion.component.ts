@@ -27,30 +27,31 @@ export class SeleccionLocalizacionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.cargando = true;
     this.storage.get('token').then((val) => {
       this.token = val;
 
       if (this.token == null) {
         this.router.navigate([environment.url_login]);
       }
-      //todo cargar las localizaciones
+      //todo cargar las localizaciones    
       this.cargaLocalizaciones();
+
     });
   }
 
   seleccionar(localizacion: Localizacion) {
     console.log(' localizacion seleccionada ', localizacion);
-    
+
     this.storage.set('localizacion', JSON.stringify(localizacion)).then(() => {
       this.menuCtrl.enable(true);
-      this.router.navigate([environment.url_home]);    
+      this.router.navigate([environment.url_home]);
     }
-    );  
+    );
   }
 
   cargaLocalizaciones() {
-    // Obtenemos las localizaciones con permisos
-    this.cargando = true;
+    // Obtenemos las localizaciones con permisos   
     this.localizaciones = new Array();
     this.storage.get("usuario").then((usuario) => {
       console.log(' usuario ', usuario);
@@ -88,8 +89,8 @@ export class SeleccionLocalizacionComponent implements OnInit {
 
     const hexColor = localizacion.getColor() != null ? '#' + localizacion.getColor() : '#000000';
 
-    return {    
-      'border-color': hexColor     
+    return {
+      'border-color': hexColor
     };
   }
 

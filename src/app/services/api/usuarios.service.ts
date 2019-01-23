@@ -19,7 +19,7 @@ export class UsuariosService {
         const params: any = {
             ver_inactivos: verInactivos
         };
-        const url = 'usuarios/listaPorEmpresa';
+        const url = environment.servidor + 'usuarios/listaPorEmpresa';
         if (empresa !== null) {
             params.empresa = empresa.getId().toString();
         }
@@ -36,7 +36,7 @@ export class UsuariosService {
      */
     getUsuario(id_usuario = 0) {
         // TODO: hay que controlar si el usuario no se pone, para que sea el usuario activo el que se edite.
-        const url = 'usuarios/' + id_usuario;
+        const url = environment.servidor + 'usuarios/' + id_usuario;
         return this.http.get(url).pipe(
             map((data: any) => {
                 return new Usuario(data.data);
@@ -58,7 +58,7 @@ export class UsuariosService {
      * Actualiza los datos personales del usuario
      */
     actualizaUsuario(id, usuario: any): Observable<any> {
-        const url = 'usuarios/editaDatosPersonales/' + id;
+        const url = environment.servidor + 'usuarios/editaDatosPersonales/' + id;
         return this.http.post(url, usuario).pipe(
             map(data => {
                 return data;

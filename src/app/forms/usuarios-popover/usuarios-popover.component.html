@@ -1,0 +1,42 @@
+<ion-list no-margin>
+  field {{ field }} orden {{ orden }}
+ <!--  <ion-list-header> -->
+    <!--  <ion-label>Orden: {{ this.orden | titlecase }} </ion-label> -->
+
+    <!--  <ion-button fill="clear" *ngIf="orden == 'descendente'" (click)="cambiarOrden('ascendente')">
+      <ion-icon slot="icon-only" name="arrow-round-down"></ion-icon>
+    </ion-button>
+    <ion-button fill="clear" *ngIf="orden == 'ascendente'" (click)="cambiarOrden('descendente')">
+      <ion-icon slot="icon-only" name="arrow-round-up"></ion-icon>
+    </ion-button> -->
+
+    <!--     <ion-button fill="clear" (click)="guardarFiltro()">
+      <ion-icon slot="icon-only" name="checkbox"></ion-icon>
+    </ion-button> -->
+<!--   </ion-list-header> -->
+
+  <ion-item style="--border-style: none !important;--min-height: 0 !important;" (click)="setOrden('nombre')">
+    <ion-button color="{{ field == 'nombre' ? 'success' : '' }}" style="--min-height: 0!important;width: 100%!important;"
+      expand="full">Nombre<ion-icon *ngIf="field == 'nombre'" slot="end" name="{{ orden_nombre }}"></ion-icon></ion-button>
+  </ion-item>
+
+  <ion-item style="--border-style: none !important;--min-height: 0 !important;" (click)="setOrden('cif')">
+    <ion-button color="{{ field == 'cif' ? 'success' : '' }}" style="--min-height: 0!important;width: 100%!important;"
+      expand="full">CIF/DNI<ion-icon *ngIf="field == 'cif'" slot="end" name="{{ orden_cif }}"></ion-icon></ion-button>
+  </ion-item>
+
+  <ion-item style="--border-style: none !important;--min-height: 0 !important;" (click)="setOrden('email')">
+    <ion-button color="{{ field == 'email' ? 'success' : '' }}" style="--min-height: 0!important;width: 100%!important;"
+      expand="full">
+      Email<ion-icon *ngIf="field == 'email'" slot="end" name="{{ orden_email }}"></ion-icon>
+    </ion-button>
+  </ion-item>  
+
+  <ion-item style="--border-style: none !important;--min-height: 0 !important;">
+    <ion-button color="" (click)="guardarFiltro()" style="--min-height: 0!important;width: 100%!important;">
+      Aceptar<ion-icon slot="end" name="checkmark"></ion-icon>
+    </ion-button>
+  </ion-item>
+
+
+</ion-list>

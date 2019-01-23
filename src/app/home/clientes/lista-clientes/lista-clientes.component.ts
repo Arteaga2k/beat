@@ -52,11 +52,11 @@ export class ListaClientesComponent implements OnInit {
   scrolling(event: any) {
 
     if (event.detail.scrollTop - this.storedScroll > this.threshold) {
-      console.log("Scrolling down");
+      //console.log("Scrolling down");
       this.renderer.setStyle(this.fabRef, 'bottom', '80px');
       this.renderer.setStyle(this.fabRef, 'webkitTransform', 'scale3d(0,0,0)');
     } else if (event.detail.scrollTop - this.storedScroll < 0) {
-      console.log("Scrolling up");
+      //console.log("Scrolling up");
       this.renderer.setStyle(this.fabRef, 'bottom', '0');
       this.renderer.setStyle(this.fabRef, 'webkitTransform', 'scale3d(1,1,1)');
     }
@@ -97,7 +97,7 @@ export class ListaClientesComponent implements OnInit {
     );
   }
 
-  
+
   clienteSeleccionado(cliente) {
     console.log('fila seleccionada', cliente);
     //this.router.navigate(['/gestion/clientes/editar/'+ cliente.getId() ]);  

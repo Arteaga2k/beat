@@ -34,16 +34,16 @@ export class FormDireccionComponent implements OnInit {
       // Rellenamos los datos del formulario
       this._direccion = direccion;
       this.municipio_sin_poner = this._direccion.getMunicipioId();
-     /* this.direccionForm.patchValue({
-        tipo_via_id: this._direccion.getTipoVia(),
-        nombre_via: this._direccion.getNombreVia(),
-        numero: this._direccion.getNumero(),
-        escalera: this._direccion.getEscalera(),
-        piso: this._direccion.getPiso(),
-        codigo_postal: this._direccion.getCodigoPostal(),
-        provincia_id: this._direccion.getProvinciaId(),
-        observaciones: this._direccion.getObservaciones()
-      });*/
+      /* this.direccionForm.patchValue({
+         tipo_via_id: this._direccion.getTipoVia(),
+         nombre_via: this._direccion.getNombreVia(),
+         numero: this._direccion.getNumero(),
+         escalera: this._direccion.getEscalera(),
+         piso: this._direccion.getPiso(),
+         codigo_postal: this._direccion.getCodigoPostal(),
+         provincia_id: this._direccion.getProvinciaId(),
+         observaciones: this._direccion.getObservaciones()
+       });*/
     }
     this.obtenerMunicipios();
   }
@@ -77,6 +77,8 @@ export class FormDireccionComponent implements OnInit {
         .subscribe(data => {
           this.tipos_localizacion = data;
           this.direccionForm.get('tipo_localizacion').setValue(this._tipoLocalizacion);
+        }, err => {
+          //todo manejar error
         });
     }
 
@@ -84,6 +86,8 @@ export class FormDireccionComponent implements OnInit {
     this.direccionSvc.getTiposVia()
       .subscribe(data => {
         this.tipos_via = data;
+      }, err => {
+        //todo manejar error
       });
 
     // Cargamos las provincias
@@ -96,6 +100,8 @@ export class FormDireccionComponent implements OnInit {
             label: provincia.getNombre()
           });
         }
+      }, err => {
+        //todo manejar error
       });
 
     // Creamos el formulario

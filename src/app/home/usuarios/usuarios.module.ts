@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { UsuariosRoutingModule } from './usuarios-routing.module';
-import { MatTableModule, MatSortModule, MatSnackBarModule } from '@angular/material';
+import { MatTableModule, MatSortModule, MatSnackBarModule, MatProgressBarModule } from '@angular/material';
 import { CustomFormModule } from 'src/app/forms/custom.form.module';
-import { ListausuariosComponent } from './listausuarios/listausuarios.component';
+
+import { UsuariosPopoverComponent } from 'src/app/forms/usuarios-popover/usuarios-popover.component';
 
 @NgModule({
   imports: [
@@ -17,8 +18,12 @@ import { ListausuariosComponent } from './listausuarios/listausuarios.component'
     MatTableModule,
     MatSortModule,
     MatSnackBarModule,
-    CustomFormModule
+    CustomFormModule,
+    MatProgressBarModule
+
+    
   ],
-  declarations: [ListausuariosComponent]
+  declarations: [],
+  entryComponents: [UsuariosPopoverComponent]
 })
 export class UsuariosModule {}

@@ -7,9 +7,10 @@ import { FormAltaEmpresaComponent } from './form-alta-empresa/form-alta-empresa.
 import { FormDireccionComponent } from './form-direccion/form-direccion.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatSelectModule, MatButtonToggleModule, MatFormFieldModule, MatIconModule, MatButtonModule, MatInputModule, MatProgressBarModule, MatCardModule } from '@angular/material';
+import { MatSelectModule, MatButtonToggleModule, MatFormFieldModule, MatIconModule, MatButtonModule, MatInputModule, MatProgressBarModule, MatCardModule, MatTableModule, MatSortModule } from '@angular/material';
 import { IonicModule } from '@ionic/angular';
-
+import { ListaUsuariosComponent } from '../home/usuarios/lista-usuarios/lista-usuarios.component';
+import { UsuariosPopoverComponent } from './usuarios-popover/usuarios-popover.component';
 
 
 @NgModule({
@@ -26,19 +27,24 @@ import { IonicModule } from '@ionic/angular';
     MatProgressBarModule,
     MatButtonToggleModule,
     MatSelectModule,
+    MatTableModule,
+    MatSortModule,
     IonicModule
 
   ],
   providers: [EmpresaService, LocalizacionService, DireccionService],
   declarations: [
     FormAltaEmpresaComponent,
-    FormDireccionComponent
+    FormDireccionComponent,
+    ListaUsuariosComponent,
+    UsuariosPopoverComponent
 
   ],
   exports: [
     FormAltaEmpresaComponent,
-    FormDireccionComponent
-
+    FormDireccionComponent,
+    ListaUsuariosComponent
   ]
 })
 export class CustomFormModule { }
+

@@ -50,10 +50,10 @@ export class LoginPage implements OnInit {
   ngAfterViewInit() {
 
     this.fabRef = this.element.nativeElement; //.querySelectorAll("ion-page");
-    console.log(' fabref ', this.fabRef);
+    // console.log(' fabref ', this.fabRef);
 
    // this.fabRef = this.element.nativeElement.querySelectorAll("ion-fab")[0];
-    this.renderer.setStyle(this.fabRef, 'background', 'url(/assets/images/login/login1.jpg) no-repeat 0 0');
+    this.renderer.setStyle(this.fabRef, 'background', this.fondoLogin() + ' no-repeat 0 0');
   }
 
   acceder() {
@@ -84,7 +84,7 @@ export class LoginPage implements OnInit {
 
         this.cargando = false;
         //todo capturar error    
-        alert('error');
+        console.log('error login ', err);
       });
     }
     return false;
@@ -92,7 +92,9 @@ export class LoginPage implements OnInit {
 
   fondoLogin() {
     const numero_aleatorio = Math.floor(Math.random() * 3 + 1);
-    this.foto_fondo = 'url("/assets/images/login/login' + numero_aleatorio + '.jpg")';
+    //this.foto_fondo = 'url("/assets/images/login/login' + numero_aleatorio + '.jpg")';
+    return  'url("/assets/images/login/login' + numero_aleatorio + '.jpg")';
+
   }
 
 }
