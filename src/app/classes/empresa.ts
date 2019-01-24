@@ -1,5 +1,5 @@
-import { Direccion } from "./direccion";
-import { Localizacion } from "./localizacion";
+import { Direccion } from './direccion';
+import { Localizacion } from './localizacion';
 
 export class Empresa {
     static DIR_LOGOS = 'assets/images/logos/';
@@ -83,7 +83,7 @@ export class Empresa {
         this.telefono = empresa.telefono;
         this.fax = empresa.fax;
         this.tipo = empresa.tipo;
-        this.activa = empresa.activa;
+        this.activa = empresa.activo;
         this.direccion = empresa.direccion ? new Direccion(empresa.direccion) : null;
         this.setLocalizaciones(empresa.localizaciones);
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef, ViewChild, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/api/usuarios.service';
 import { PermisosService } from 'src/app/services/api/permisos.service';
@@ -17,6 +17,8 @@ import { UsuariosPopoverComponent } from '../../../forms/usuarios-popover/usuari
   styleUrls: ['./lista-usuarios.component.scss']
 })
 export class ListaUsuariosComponent implements OnInit {
+
+  @Input() showToolbar: boolean = true;
 
   usuarios: Usuario[] = [];
   usuarios_filtrado: Usuario[] = [];
@@ -69,6 +71,7 @@ export class ListaUsuariosComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.displayedColumns = this.columnNames.map(x => x.id);
     // Lo primero será completar el array de permisos requeridos (obligatorios)
     // para este componente. Este array se hereda del componente base
@@ -101,6 +104,16 @@ export class ListaUsuariosComponent implements OnInit {
       this.cargando = true;
       this.actualizarListaUsuarios();
     } */
+  }
+
+  ngAfterViewInit() {
+
+    //console.log('showtoolbar ' , this.showToolbar);
+
+    this.fabRef = this.element.nativeElement.querySelectorAll("ion-fab")[0];
+    this.renderer.setStyle(this.fabRef, 'bottom', this.showToolbar == true ? '80px':'130px');
+
+    this.renderer.setStyle(this.fabRef, 'webkitTransition', 'transform 500ms,top 500ms');
   }
 
   filtrarListaUsuarios() {
@@ -156,7 +169,8 @@ export class ListaUsuariosComponent implements OnInit {
       cssClass: 'popover-usuarios',
       translucent: true,
       component: UsuariosPopoverComponent,
-      event: ev
+      event: ev,
+      
     });
 
     popover.onDidDismiss()
@@ -191,12 +205,12 @@ export class ListaUsuariosComponent implements OnInit {
   scrolling(event: any) {
 
     if (event.detail.scrollTop - this.storedScroll > this.threshold) {
-      //console.log("Scrolling down");
-      this.renderer.setStyle(this.fabRef, 'bottom', '80px');
+      console.log("Scrolling down");
+      this.renderer.setStyle(this.fabRef, 'bottom', this.showToolbar == true ? '80px':'130px');
       this.renderer.setStyle(this.fabRef, 'webkitTransform', 'scale3d(0,0,0)');
     } else if (event.detail.scrollTop - this.storedScroll < 0) {
-      //console.log("Scrolling up");
-      this.renderer.setStyle(this.fabRef, 'bottom', '0');
+      console.log("Scrolling up");
+      this.renderer.setStyle(this.fabRef, 'bottom', this.showToolbar == true ? '80px':'130px');
       this.renderer.setStyle(this.fabRef, 'webkitTransform', 'scale3d(1,1,1)');
     }
 

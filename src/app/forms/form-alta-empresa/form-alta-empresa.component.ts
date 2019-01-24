@@ -9,7 +9,7 @@ import { Empresa } from 'src/app/classes/empresa';
 import { Direccion } from 'src/app/classes/direccion';
 import { Localizacion } from 'src/app/classes/localizacion';
 import { EmpresaService } from 'src/app/services/api/empresa.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, _MatChipListMixinBase } from '@angular/material';
 
 
 @Component({
@@ -20,15 +20,49 @@ import { MatSnackBar } from '@angular/material';
 })
 export class FormAltaEmpresaComponent implements OnInit {
 
+
+
+  _empresa: Empresa;
   @Input() rol_empresa: string;
   @Input() redireccion: string;
 
+
+
   empresaLocalizaciones: Array<Localizacion>;
+  @Input() set cargando(cargando: boolean) {
+    this._cargando = cargando;
+  }
+
+  get cargando(): boolean {
+    return this._cargando;
+  }
+
+  @Input() set tab(tab: string) {
+    this._tab = tab;
+  }
+
+  get tab(): string {
+    return this._tab;
+  }
+
 
   @Input() set empresa(empresa: Empresa) {
+
+    console.log(' set empresa ', empresa);
     if (empresa) {
+      this._empresa = empresa;
+
+      // this._cargando = false;
       this.modoEdicion = true;
       this.empresaLocalizaciones = empresa.getLocalizaciones();
+
+      //TODO BORRAR
+      empresa.getLocalizaciones().forEach(element => {
+        for (let index = 0; index < 10; index++) {
+          this.empresaLocalizaciones.push(new Localizacion(element));
+        }
+      });
+
       this.direccion = empresa.getDireccion();
       this.empresaForm.patchValue({
         nombre: empresa.getNombre(),
@@ -39,15 +73,22 @@ export class FormAltaEmpresaComponent implements OnInit {
       });
     }
   }
-  tab = 'datos_personales_tab'; //mostramos el tab datos personales por defecto
+
+  get empresa(): Empresa {
+    return this._empresa;
+  }
+
+  _tab = 'datos_personales_tab';
+  //tab = 'datos_personales_tab'; //mostramos el tab datos personales por defecto
   localizaciones = [];
   direccion: Direccion = null;
   modoEdicion = false;
   asociarUsuario = false;
-  mostrarErrores = false; 
+  mostrarErrores = false;
   empresaForm: FormGroup;
   contactos: FormArray;
   tipo_empresa: String = '';
+  _cargando: boolean = true;
 
   constructor(
     private empresasSvc: EmpresaService,
@@ -57,6 +98,7 @@ export class FormAltaEmpresaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log('ngOnInit');
     // Bloqueamos el formulario
     //todo bloquear pantalla y mostrar cargando datos
 
@@ -104,9 +146,9 @@ export class FormAltaEmpresaComponent implements OnInit {
           snackBarRef.afterDismissed().subscribe(info => {
             if (info.dismissedByAction === true) {
               //todo hacer cosas   
-              this.router.navigate(['/gestion']); 
+              this.router.navigate(['/gestion']);
             }
-          });         
+          });
         }
       );
 
@@ -166,10 +208,10 @@ export class FormAltaEmpresaComponent implements OnInit {
 
   guardarEmpresa() {
     console.log('formulario ' + JSON.stringify(this.empresaForm.value));
-    
+
     // Validamos el formulario
     if (this.empresaForm.invalid) {
-      this.snackBar.open('Error!. Hay errores en el formulario que debe corregir.');     
+      this.snackBar.open('Error!. Hay errores en el formulario que debe corregir.');
       this.mostrarErrores = true;
       return;
     }
@@ -183,7 +225,7 @@ export class FormAltaEmpresaComponent implements OnInit {
       //todo descomentar
       //this.editarEmpresa();
     } else {
-     // this.altaEmpresa();
+      // this.altaEmpresa();
     }
   }
 
@@ -215,35 +257,35 @@ export class FormAltaEmpresaComponent implements OnInit {
       );
   } */
 
-/*   editarEmpresa() {
-
-    this.empresasSvc
-      .editaEmpresa(this.parent.token, this.empresaForm.value)
-      .subscribe(
-        data => {
-          this.parent.messageSvc.mensajeSencillo(
-            this.parent.messageSvc.MSG_SUCCESS,
-            'Éxito',
-            this.rol_empresa + ' creado con éxito.',
-            15
-          );
-          this.parent.blockUI.stop();
-          this.router.navigate(['/gestion/' + this.redireccion + '/listar']);
-        },
-        err => {
-          this.parent.messageSvc.mensajeSencillo(
-            this.parent.messageSvc.MSG_ERROR,
-            'Éxito',
-            'Ha ocurrido un error al intentar dar de alta al ' +
-            this.rol_empresa +
-            '. Si persiste contacte con el administrador.',
-            15
-          );
-          this.parent.blockUI.stop();
-        }
-      );
-
-  } */
+  /*   editarEmpresa() {
+  
+      this.empresasSvc
+        .editaEmpresa(this.parent.token, this.empresaForm.value)
+        .subscribe(
+          data => {
+            this.parent.messageSvc.mensajeSencillo(
+              this.parent.messageSvc.MSG_SUCCESS,
+              'Éxito',
+              this.rol_empresa + ' creado con éxito.',
+              15
+            );
+            this.parent.blockUI.stop();
+            this.router.navigate(['/gestion/' + this.redireccion + '/listar']);
+          },
+          err => {
+            this.parent.messageSvc.mensajeSencillo(
+              this.parent.messageSvc.MSG_ERROR,
+              'Éxito',
+              'Ha ocurrido un error al intentar dar de alta al ' +
+              this.rol_empresa +
+              '. Si persiste contacte con el administrador.',
+              15
+            );
+            this.parent.blockUI.stop();
+          }
+        );
+  
+    } */
 
   estadoAsociarUsuario(estado: boolean) {
     const claveControl = this.empresaForm.get('usuario').get('clave');

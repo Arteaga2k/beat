@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
-import { PruebaModule } from './prueba/prueba.module';
 import { ClientesModule } from './clientes/clientes.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
+import { LocalizacionesModule } from './localizaciones/localizaciones.module';
  
 const routes: Routes = [
   { path: '', redirectTo: '/gestion/clientes', pathMatch: 'full' },
@@ -11,10 +11,10 @@ const routes: Routes = [
     path: '', component: HomeComponent,
     children: [
       { path: 'clientes', loadChildren: () => ClientesModule },
-      { path: 'usuarios', loadChildren: () => UsuariosModule }      
+      { path: 'usuarios', loadChildren: () => UsuariosModule },
+      { path: 'localizaciones', loadChildren: () => LocalizacionesModule }     
     ]
-  },
- // { path: 'usuarios', loadChildren: './usuarios/usuarios.module#UsuariosPageModule' }
+  } 
 
 
 ];

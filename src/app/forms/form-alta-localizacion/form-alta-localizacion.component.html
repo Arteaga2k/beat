@@ -1,0 +1,230 @@
+<form [formGroup]="localizacionForm">
+
+  <ion-row>
+    <ion-col size="8">
+      <mat-form-field>
+        <input matInput type="text" id="input-nombre" placeholder="Nombre" formControlName="nombre" />
+
+        <mat-error *ngIf="mostrarErrores && localizacionForm.get('nombre').hasError('required')">
+          El campo nombre es requerido.
+        </mat-error>
+      </mat-form-field>
+    </ion-col>
+
+    <ion-col size="4">
+      <mat-form-field>
+        <input matInput type="text" id="input-nombre" placeholder="email" formControlName="email" />
+        <mat-error *ngIf="mostrarErrores && localizacionForm.get('email').hasError('required')">
+          El campo email es requerido.
+        </mat-error>
+        <mat-error *ngIf="mostrarErrores && localizacionForm.get('email').hasError('email')">
+          El email introducido no es válido.
+        </mat-error>
+      </mat-form-field>
+
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="8">
+      <mat-form-field>
+        <input matInput type="text" id="input-telefono" placeholder="Teléfono" formControlName="telefono" />
+      </mat-form-field>
+    </ion-col>
+
+    <ion-col size="4">
+      <mat-form-field>
+        <mat-select placeholder="Color" formControlName="color" required>
+          <mat-option   [ngStyle]="{ 'background-color': '#' + paleta.value, 'color': 'white' }" *ngFor="let paleta of paleta_colores" [value]="paleta.value">
+              <span
+              class="cuadrado-color"
+              [ngStyle]="{ 'background-color': '#' + paleta.value }"
+            ></span>
+            {{ paleta.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+        <mat-form-field>
+        <input matInput type="text" id="input-imagen"  formControlName="imagen" />
+        </mat-form-field>
+    </ion-col>
+  </ion-row>
+
+
+</form>
+
+
+
+
+<!-- <p-dialog [(visible)]="display" [modal]="true" [draggable]="false" [transitionOptions]="'200ms'" [blockScroll]="true"
+  [dismissableMask]="true" [breakpoint]="900" [style]="{ height: '80vh', top: '10vh' }" [contentStyle]="{ 'overflow-y': 'scroll', 'max-height': '70vh' }">
+  <p-header> {{ form_localizacion_titulo }} localización </p-header>
+  <form [formGroup]="localizacionForm">
+    <div class="row">
+      <div class="form-group col-lg-8 col-md-6">
+        <label for="input-nombre"> Nombre* </label>
+        <input type="text" id="input-nombre" class="form-control form-control-sm" formControlName="nombre" [ngClass]="{
+            'is-invalid text-danger border-danger':
+              mostrarErrores && localizacionForm.get('nombre').invalid
+          }" />
+        <span *ngIf="
+            mostrarErrores &&
+            localizacionForm.get('nombre').hasError('required')
+          "
+          class="text-small text-danger">
+          El campo nombre es requerido.
+        </span>
+      </div>
+      <div class="form-group col-lg-4 col-md-6">
+        <label for="input-email"> Email* </label>
+        <input type="text" id="input-nombre" class="form-control form-control-sm" formControlName="email" [ngClass]="{
+            'is-invalid text-danger border-danger':
+              mostrarErrores && localizacionForm.get('email').invalid
+          }" />
+        <span *ngIf="
+            mostrarErrores && localizacionForm.get('email').hasError('required')
+          "
+          class="text-small text-danger">
+          El campo email es requerido.
+        </span>
+        <span *ngIf="
+            mostrarErrores && localizacionForm.get('email').hasError('email')
+          " class="text-small text-danger">
+          El email introducido no es válido.
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-lg-8 col-md-6">
+        <label for="input-telefono"> Teléfono </label>
+        <input type="text" id="input-telefono" class="form-control form-control-sm" formControlName="telefono"
+          [ngClass]="{
+            'is-invalid text-danger border-danger':
+              mostrarErrores && localizacionForm.get('telefono').invalid
+          }" />
+      </div>
+      <div class="form-group col-lg-4 col-md-6">
+        <label for="input-color"> Color* </label>
+        <p-dropdown class="select form-control form-control-sm" [required]="true" formControlName="color" [options]="paleta_colores"
+          [filter]="false" [dropdownIcon]="'pi pi-cloud-download'">
+          <ng-template let-color pTemplate="item">
+            <span class="cuadrado-color" [ngStyle]="{ 'background-color': '#' + color.value }"></span>
+            {{ color.label }}
+          </ng-template>
+        </p-dropdown>
+        <span *ngIf="
+            mostrarErrores && localizacionForm.get('color').hasError('required')
+          "
+          class="text-small text-danger">
+          El campo color es requerido.
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-lg-6 col-md-6">
+        <label for="input-imagen"> Imagen </label>
+        <input type="text" id="input-imagen" class="form-control form-control-sm" formControlName="imagen" [ngClass]="{
+            'is-invalid text-danger border-danger':
+              mostrarErrores && localizacionForm.get('imagen').invalid
+          }" />
+      </div>
+    </div>
+    <beatForm-direccion *ngIf="direccion" [direccion]="direccion" [(tipoLocalizacion)]="tipoLocalizacion"
+      [conTipoLocalizacion]="true" (formReady)="formDireccionInicializado('direccion', $event)" [mostrarErrores]="mostrarErrores"></beatForm-direccion>
+  </form>
+  <p-footer>
+    <button class="btn btn-primary" type="button" (click)="guardarLocalizacion()" pButton icon="fa fa-pencil-square-o">
+      Guardar
+    </button>
+  </p-footer>
+</p-dialog>
+[(visible)]="display"
+[modal]="true"
+[draggable]="false"
+[transitionOptions]="'200ms'"
+[blockScroll]="true"
+[dismissableMask]="true"
+[breakpoint]="900"
+[style]="{ height: '80vh', top: '10vh' }"
+[contentStyle]="{ 'overflow-y': 'scroll', 'max-height': '70vh' }"
+>
+<p-header> {{ form_localizacion_titulo }} localización </p-header>
+<form [formGroup]="localizacionForm">
+  <div class="row">
+    <div class="form-group col-lg-8 col-md-6">
+      <label for="input-nombre"> Nombre* </label>
+      <input type="text" id="input-nombre" class="form-control form-control-sm" formControlName="nombre" [ngClass]="{
+            'is-invalid text-danger border-danger':
+              mostrarErrores && localizacionForm.get('nombre').invalid
+          }" />
+      <span *ngIf="
+            mostrarErrores &&
+            localizacionForm.get('nombre').hasError('required')
+          "
+        class="text-small text-danger">
+        El campo nombre es requerido.
+      </span>
+    </div>
+    <div class="form-group col-lg-4 col-md-6">
+      <label for="input-email"> Email* </label>
+      <input type="text" id="input-nombre" class="form-control form-control-sm" formControlName="email" [ngClass]="{
+            'is-invalid text-danger border-danger':
+              mostrarErrores && localizacionForm.get('email').invalid
+          }" />
+      <span *ngIf="
+            mostrarErrores && localizacionForm.get('email').hasError('required')
+          " class="text-small text-danger">
+        El campo email es requerido.
+      </span>
+      <span *ngIf="
+            mostrarErrores && localizacionForm.get('email').hasError('email')
+          " class="text-small text-danger">
+        El email introducido no es válido.
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-lg-8 col-md-6">
+      <label for="input-telefono"> Teléfono </label>
+      <input type="text" id="input-telefono" class="form-control form-control-sm" formControlName="telefono" [ngClass]="{
+            'is-invalid text-danger border-danger':
+              mostrarErrores && localizacionForm.get('telefono').invalid
+          }" />
+    </div>
+    <div class="form-group col-lg-4 col-md-6">
+      <label for="input-color"> Color* </label>
+      <p-dropdown class="select form-control form-control-sm" [required]="true" formControlName="color" [options]="paleta_colores"
+        [filter]="false" [dropdownIcon]="'pi pi-cloud-download'">
+        <ng-template let-color pTemplate="item">
+          <span class="cuadrado-color" [ngStyle]="{ 'background-color': '#' + color.value }"></span>
+          {{ color.label }}
+        </ng-template>
+      </p-dropdown>
+      <span *ngIf="
+            mostrarErrores && localizacionForm.get('color').hasError('required')
+          " class="text-small text-danger">
+        El campo color es requerido.
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-lg-6 col-md-6">
+      <label for="input-imagen"> Imagen </label>
+      <input type="text" id="input-imagen" class="form-control form-control-sm" formControlName="imagen" [ngClass]="{
+            'is-invalid text-danger border-danger':
+              mostrarErrores && localizacionForm.get('imagen').invalid
+          }" />
+    </div>
+  </div>
+  <beatForm-direccion *ngIf="direccion" [direccion]="direccion" [(tipoLocalizacion)]="tipoLocalizacion"
+    [conTipoLocalizacion]="true" (formReady)="formDireccionInicializado('direccion', $event)" [mostrarErrores]="mostrarErrores"></beatForm-direccion>
+</form>
+<p-footer>
+  <button class="btn btn-primary" type="button" (click)="guardarLocalizacion()" pButton icon="fa fa-pencil-square-o">
+    Guardar
+  </button>
+</p-footer>
+</p-dialog> -->

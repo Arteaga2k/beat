@@ -101,7 +101,9 @@ export class ListaClientesComponent implements OnInit {
   clienteSeleccionado(cliente) {
     console.log('fila seleccionada', cliente);
     //this.router.navigate(['/gestion/clientes/editar/'+ cliente.getId() ]);  
-    this.router.navigateByUrl('/gestion/clientes/editar/' + cliente.getId());
+    this.router.navigate(['/gestion/clientes/editar/' + cliente.getId()]);
+
+    
   }
 
   limpiaBusqueda() {

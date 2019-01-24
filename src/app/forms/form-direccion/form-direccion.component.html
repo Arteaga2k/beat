@@ -1,3 +1,4 @@
+<mat-progress-bar mode="query" color="accent" *ngIf="cargando"></mat-progress-bar>
 <div [formGroup]="direccionForm" padding>
     <ion-row *ngIf="conTipoLocalizacion">
         <ion-col size="12">
@@ -65,9 +66,9 @@
     <ion-row>
         <ion-col size="6">
             <mat-form-field>
-                <mat-select placeholder="Provincia" formControlName="provincia_id" (onChange)="obtenerMunicipios()"
+                <mat-select placeholder="Provincia" formControlName="provincia_id" (selectionChange)="obtenerMunicipios()"
                     required>
-                    <mat-option *ngFor="let provincia of provincias" [value]="provincia.id">
+                    <mat-option *ngFor="let provincia of provincias" [value]="provincia.value">
                         {{ provincia.label }}
                     </mat-option>
                 </mat-select>
@@ -90,7 +91,7 @@
             <mat-form-field>
                 <mat-select id="input-municipio" placeholder="Municipio" formControlName="municipio_id" (change)="comprobarCP($event.target)"
                     required>
-                    <mat-option *ngFor="let municipio of municipios">
+                    <mat-option *ngFor="let municipio of municipios" [value]="municipio.value">
                         {{ municipio.label }}
                     </mat-option>
                 </mat-select>

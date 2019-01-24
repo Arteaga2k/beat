@@ -7,16 +7,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./alta-cliente.component.scss']
 })
 export class AltaClienteComponent implements OnInit {
+  cargando: boolean = false;
+  _tab: string = 'datos_personales_tab';
 
   constructor(private router: Router) { }
 
-  tab = 'calendar';
-
-  show(tab) {
-    this.tab = tab;
-  }
 
   ngOnInit() {
+    this.cargando = true;
   }
 
   volverClick() {

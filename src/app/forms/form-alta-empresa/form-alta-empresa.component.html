@@ -25,12 +25,8 @@
         </ion-tab-button>
     </ion-tab-bar>
 
-
-
-
-
-
     <ng-container *ngIf="tab === 'datos_personales_tab'">
+        <mat-progress-bar mode="query" color="accent" *ngIf="_cargando == true && !modoEdicion"></mat-progress-bar>
         <div padding>
             <ion-row>
                 <ion-col size="8">
@@ -72,8 +68,6 @@
                         <mat-error *ngIf="mostrarErrores &&
                         empresaForm.get('email').hasError('email')">
                             El email introducido no es válido.</mat-error>
-
-
                     </mat-form-field>
                 </ion-col>
 
@@ -112,19 +106,18 @@
         </div>
     </ng-container>
 
-    <ng-container *ngIf="tab === 'lista_usuarios_tab'">
-        <beatApp-listausuarios></beatApp-listausuarios>
-    </ng-container>
 
     <ng-container *ngIf="tab === 'usuario_acceso_tab'">
         <ion-row formGroupName="usuario">
             <ion-col size="6">
                 <h3>Asociar usuario:</h3>
             </ion-col>
-            <ion-col size="6">
+            <ion-col size="6" class="centrar_botonera">
                 <mat-button-toggle-group #group="matButtonToggleGroup" appearance="legacy" name="fontStyle" aria-label="Font Style">
-                    <mat-button-toggle value="si" color="primary" (change)="estadoAsociarUsuario(true)">Sí</mat-button-toggle>
-                    <mat-button-toggle value="no" color="accent" (change)="estadoAsociarUsuario(false)">No</mat-button-toggle>
+                    <mat-button-toggle [ngStyle]="{ 'background': asociarUsuario == true ? '#10dc60' :''}" value="si"
+                        (change)="estadoAsociarUsuario(true)">Sí</mat-button-toggle>
+                    <mat-button-toggle [ngStyle]="{ 'background': asociarUsuario == false ? '#f04141' :'' }" value="no"
+                        (change)="estadoAsociarUsuario(false)">No</mat-button-toggle>
                 </mat-button-toggle-group>
             </ion-col>
             <ion-col>
@@ -140,17 +133,20 @@
             </ion-col>
         </ion-row>
     </ng-container>
-
-    <ng-container *ngIf="tab === 'direccion_tab'">
-        <beatForm-direccion [direccion]="direccion" [conTipoLocalizacion]="!modoEdicion" [tipoLocalizacion]="null"
-            (formReady)="formDireccionInicializado('direccion', $event)" [mostrarErrores]="mostrarErrores">
-        </beatForm-direccion>
-
-    </ng-container>
-
-    <ng-container *ngIf="tab === 'lista_localizaciones_tab'">
-        <!--  <beatForm-localizaciones [empresa]="empresa" [localizaciones]="empresaLocalizaciones"></beatForm-localizaciones> -->
-    </ng-container>
-
-
 </form>
+
+<ng-container *ngIf="tab === 'direccion_tab'">
+    <beatForm-direccion [direccion]="direccion" [conTipoLocalizacion]="!modoEdicion" [tipoLocalizacion]="null"
+        (formReady)="formDireccionInicializado('direccion', $event)" [mostrarErrores]="mostrarErrores">
+    </beatForm-direccion>
+</ng-container>
+
+<ng-container *ngIf="tab === 'lista_localizaciones_tab'">
+    <beatForm-localizaciones showToolbar="false" [empresa]="empresa" [localizaciones]="empresaLocalizaciones"></beatForm-localizaciones>
+    <!--  <beatForm1-localizaciones showToolbar="false" [empresa]="empresa" [localizaciones]="empresaLocalizaciones"></beatForm1-localizaciones> -->
+
+</ng-container>
+
+<ng-container *ngIf="tab === 'lista_usuarios_tab'">
+    <beatApp-listausuarios showToolbar="false"></beatApp-listausuarios>
+</ng-container>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { throwError, Observable } from 'rxjs';
+import { throwError, Observable, forkJoin } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Municipio } from 'src/app/classes/municipio';
 import { Provincia } from 'src/app/classes/provincia';
@@ -50,18 +50,32 @@ export class DireccionService {
             }));
     }
 
-    /*private handleError(error: HttpErrorResponse) {
-        if (error.error instanceof ErrorEvent) {
-            // A client-side or network error occurred. Handle it accordingly.
-            console.error('An error occurred:', error.error.message);
-        } else {
-            // The backend returned an unsuccessful response code.
-            // The response body may contain clues as to what went wrong,
-            console.error(
-                `Backend returned code ${error.status}, ` +
-                `body was: ${error.error}`);
-        }
-        // return an observable with a user-facing error message
-        return throwError('Something bad happened; please try again later.');
-    }*/
+    getDatosDireccionForm(): Observable<any> {
+
+        let url_1 = environment.servidor + 'direcciones/listaTiposVia'; 
+        let url_2 = environment.servidor + 'direcciones/listaProvincias';       
+
+        let response1 = this.http.get<TipoVia[]>(url_1).pipe(
+            map((data: any) => {
+                const tipos_via: TipoVia[] = [];
+                for (const tipo_via of data) {
+                    tipos_via.push(new TipoVia(tipo_via));
+                }
+                return tipos_via;
+            }));
+
+        let response2= this.http.get(url_2).pipe(
+            map((data: any) => {
+                const provincias: Provincia[] = [];
+                for (var i in data) {
+                    provincias.push(new Provincia(data[i]));
+                }
+                return provincias;
+            }));
+        
+
+        return forkJoin([response1, response2]);
+      }
+
+    
 }

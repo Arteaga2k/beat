@@ -1,6 +1,7 @@
 import { PERMISOS } from './../constantes';
 import { Component } from '@angular/core';
 import { PermisosService } from 'src/app/services/api/permisos.service';
+import { Observable } from 'rxjs';
 
 
 
@@ -32,5 +33,6 @@ export class BaseComponent {
     } else {
       return this.permisosSvc.hasPermiso(permisos);
     }
-  }
+  }  
+  
 }

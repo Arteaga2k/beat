@@ -1,5 +1,5 @@
 <ion-list no-margin>
-  field {{ field }} orden {{ orden }}
+ <!--  field {{ field }} orden {{ orden }} -->
  <!--  <ion-list-header> -->
     <!--  <ion-label>Orden: {{ this.orden | titlecase }} </ion-label> -->
 
@@ -25,16 +25,16 @@
       expand="full">CIF/DNI<ion-icon *ngIf="field == 'cif'" slot="end" name="{{ orden_cif }}"></ion-icon></ion-button>
   </ion-item>
 
-  <ion-item style="--border-style: none !important;--min-height: 0 !important;" (click)="setOrden('email')">
+  <ion-item style="--border-style: none;--min-height: 0 !important;" (click)="setOrden('email')">
     <ion-button color="{{ field == 'email' ? 'success' : '' }}" style="--min-height: 0!important;width: 100%!important;"
       expand="full">
       Email<ion-icon *ngIf="field == 'email'" slot="end" name="{{ orden_email }}"></ion-icon>
     </ion-button>
   </ion-item>  
 
-  <ion-item style="--border-style: none !important;--min-height: 0 !important;">
-    <ion-button color="" (click)="guardarFiltro()" style="--min-height: 0!important;width: 100%!important;">
-      Aceptar<ion-icon slot="end" name="checkmark"></ion-icon>
+  <ion-item float-right style="--border-style: none !important;--min-height: 0 !important;">
+    <ion-button color="light" size="small" (click)="guardarFiltro()" >
+      Guardar<ion-icon slot="end" name="checkmark"></ion-icon>
     </ion-button>
   </ion-item>
 

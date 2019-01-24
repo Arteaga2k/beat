@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header *ngIf="showToolbar == true">
     <ion-toolbar color="primary">
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
@@ -28,34 +28,43 @@
 
 <!-- <ion-virtual-scroll [items]="usuarios"> -->
 
-    <ion-list>
-
-            <ion-card *ngFor="let item of usuarios_filtrado">
-                    <ion-avatar class="imagen_cliente" slot="end" float-right>
-                        <img [src]="'/assets/images/localizaciones/almacen.jpg'" />
-                    </ion-avatar>
-                    <ion-card-header class="header_cabeceras">
-                        <b>
-                            <h3>{{ item.getNombre() }}</h3>
-                        </b>
-                    </ion-card-header>
-                    <ion-card-content>
-                        <ion-card-subtitle>
-                            <ion-icon name="information-circle" color="primary"></ion-icon> {{ item.getCargo() }}
-                        </ion-card-subtitle>
-                        <ion-card-subtitle>
-                            <ion-icon name="mail" color="primary"></ion-icon>
-                            {{ item.getEmail() }}
-                        </ion-card-subtitle>
-                    </ion-card-content>
-                </ion-card>
-    </ion-list>
+ <ion-content [scrollEvents]="true" (ionScroll)="scrolling($event)">       
 
 
+    <ion-card *ngFor="let item of usuarios_filtrado">
+        <ion-avatar class="imagen_cliente" slot="end" float-right>
+            <img [src]="'/assets/images/localizaciones/almacen.jpg'" />
+        </ion-avatar>
+        <ion-card-header class="header_cabeceras">
+            <b>
+                <h3>{{ item.getNombre() }}</h3>
+            </b>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-card-subtitle>
+                <ion-icon name="information-circle" color="primary"></ion-icon> {{ item.getCargo() }}
+            </ion-card-subtitle>
+            <ion-card-subtitle>
+                <ion-icon name="mail" color="primary"></ion-icon>
+                {{ item.getEmail() }}
+            </ion-card-subtitle>
+        </ion-card-content>
+    </ion-card> 
 
-   
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" [routerLink]="'/gestion/usuarios/crear'" routerDirection="forward">
+    <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+</ion-fab>
 
-    <!-- <ion-item *virtualItem="let item">
+
+ </ion-content> 
+
+
+
+
+
+<!-- <ion-item *virtualItem="let item">
         {{ item.nombre }}
     </ion-item> -->
 <!-- </ion-virtual-scroll> -->

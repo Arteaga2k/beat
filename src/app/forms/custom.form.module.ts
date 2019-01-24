@@ -11,11 +11,16 @@ import { MatSelectModule, MatButtonToggleModule, MatFormFieldModule, MatIconModu
 import { IonicModule } from '@ionic/angular';
 import { ListaUsuariosComponent } from '../home/usuarios/lista-usuarios/lista-usuarios.component';
 import { UsuariosPopoverComponent } from './usuarios-popover/usuarios-popover.component';
+import { FormListaLocalizacionesComponent } from './form-lista-localizaciones/form-lista-localizaciones.component';
+import { RouterModule } from '@angular/router';
+import { FormAltaLocalizacionComponent } from './form-alta-localizacion/form-alta-localizacion.component';
+import { ListaLocalizacionComponent } from '../home/localizaciones/lista-localizacion/lista-localizacion.component'
 
 
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -37,13 +42,18 @@ import { UsuariosPopoverComponent } from './usuarios-popover/usuarios-popover.co
     FormAltaEmpresaComponent,
     FormDireccionComponent,
     ListaUsuariosComponent,
-    UsuariosPopoverComponent
+    ListaLocalizacionComponent,
+    UsuariosPopoverComponent,
+    FormListaLocalizacionesComponent,
+    FormAltaLocalizacionComponent
 
   ],
   exports: [
     FormAltaEmpresaComponent,
     FormDireccionComponent,
-    ListaUsuariosComponent
+    ListaUsuariosComponent,
+    ListaLocalizacionComponent,
+    FormAltaLocalizacionComponent
   ]
 })
 export class CustomFormModule { }

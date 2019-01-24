@@ -11,14 +11,14 @@ import { Empresa } from 'src/app/classes/empresa';
 export class EmpresaService {
 
   constructor(private http: HttpClient) { }
-  
+
   creaEmpresa(token, empresa: any): Observable<any> {
     empresa.token = token;
     return this.http
       .post(environment.servidor + 'empresas', empresa).pipe(
-      map(data => {
-        return data;
-      }), catchError(this.handleError));
+        map(data => {
+          return data;
+        }));
   }
 
   editaEmpresa(token, empresa: any): Observable<any> {
@@ -37,8 +37,15 @@ export class EmpresaService {
     return this.http.post<any>(environment.servidor + 'empresas/listaClientes', {}).pipe(
       map(data => {
         return data;
-      }),
-      catchError(this.handleError));
+      }));
+  }
+
+
+  bajaCliente(id_empresa: number): Observable<any> {
+    const action = 'empresas/bajaCliente/' + id_empresa;
+    return this.http.post(action, {}).pipe(map(data => {
+      return data;
+    }));
   }
 
   /**
@@ -49,29 +56,33 @@ export class EmpresaService {
    *   
    * @param rol: String nullable
    */
-  getTipoEmpresa( rol = null): any {
+  getTipoEmpresa(rol = null): any {
     return this.http.post<{ tipo: string; }>(environment.servidor + 'empresas/getTipoEmpresa', {
       rol: rol
     }).pipe(
       map(data => {
         return data.tipo;
-      }), catchError(this.handleError));
+      }));
   }
 
-
-
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+  getLocalizaciones(empresa: Empresa = null): any {
+    if (empresa == null) {
+      empresa = new Empresa(JSON.parse(localStorage.getItem('empresa')));
     }
-    // return an observable with a user-facing error message
-    return throwError('Something bad happened; please try again later.');
+    const id_empresa = empresa != null ? empresa.getId() : null;
+    if (id_empresa !== null) {
+      // TODO: llamada al action de la API.
+      return this.http.get('empresas/' + id_empresa + '/localizaciones').pipe(
+        map(data => {
+          return data;
+        }));
+    } else {
+      // Si no propocionamos empresa, deberemos lanzar una excepción
+      throw new Error('Es necesario especificar una empresa');
+    }
   }
+
+
+
+
 }

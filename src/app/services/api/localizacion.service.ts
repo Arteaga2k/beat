@@ -12,14 +12,19 @@ export class LocalizacionService {
 
     constructor(private http: HttpClient) { }
 
+    getLocalizacion(id: any): Observable<any> {
+        let url = environment.servidor + 'localizaciones/'+ id;
+        return this.http.get<String[]>(url);
+
+    }
+
     getTiposLocalizacion(): Observable<any> {
-        let url = environment.servidor + 'localizaciones/listaTiposLocalizacion';       
+        let url = environment.servidor + 'localizaciones/listaTiposLocalizacion';
         return this.http.get<String[]>(url);
     }
 
-    getColoresLocalizacion(token: string): Observable<any> {
+    getColoresLocalizacion(): Observable<any> {
         let url = environment.servidor + 'localizaciones/getColores';
-        url += '?token=' + token;
         return this.http.get<String[]>(url);
     }
 
@@ -29,8 +34,7 @@ export class LocalizacionService {
             .pipe(
                 map(data => {
                     return data;
-                }),
-                catchError(this.handleError));
+                }));
     }
 
     editaLocalizacion(id: number, datos) {
@@ -38,22 +42,16 @@ export class LocalizacionService {
         return this.http.put(environment.servidor + action, datos).pipe(
             map(data => {
                 return data;
-            }),
-            catchError(this.handleError));
+            }));
     }
 
-    private handleError(error: HttpErrorResponse) {
-        if (error.error instanceof ErrorEvent) {
-            // A client-side or network error occurred. Handle it accordingly.
-            console.error('An error occurred:', error.error.message);
-        } else {
-            // The backend returned an unsuccessful response code.
-            // The response body may contain clues as to what went wrong,
-            console.error(
-                `Backend returned code ${error.status}, ` +
-                `body was: ${error.error}`);
-        }
-        // return an observable with a user-facing error message
-        return throwError('Something bad happened; please try again later.');
+    bajaLocalizacion(id: number): Observable<any> {
+        const action = 'localizaciones/' + id;
+        return this.http.delete(environment.servidor + action).pipe(
+            map(data => {
+                return data;
+            }));
     }
+
+
 }

@@ -19,8 +19,7 @@ import { UsuariosPopoverComponent } from 'src/app/forms/usuarios-popover/usuario
     MatSortModule,
     MatSnackBarModule,
     CustomFormModule,
-    MatProgressBarModule
-
+    MatProgressBarModule 
     
   ],
   declarations: [],

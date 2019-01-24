@@ -1,0 +1,38 @@
+<ion-content [scrollEvents]="true" (ionScroll)="scrolling($event)">  
+ 
+    <ion-card *ngFor="let localizacion of localizaciones" [routerLink]="['/gestion/localizaciones/crear/'+ localizacion.getId() + '/'+ empresa.getId()]" routerDirection="forward">
+      <ion-avatar class="imagen_cliente" slot="end" float-right>
+        <img [src]="'/assets/images/localizaciones/' + localizacion.getImagen()" />
+
+      </ion-avatar>
+      <ion-card-header class="header_cabeceras">
+        <b>
+          <h3>{{ localizacion.getNombre() }}</h3>
+        </b>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-card-subtitle>
+          <ion-icon name="information-circle" color="primary"></ion-icon> {{ localizacion.tipo }}
+        </ion-card-subtitle>
+        <ion-card-subtitle>
+          <ion-icon name="map" color="primary"></ion-icon>
+          {{localizacion.direccion.direccion_texto }}
+        </ion-card-subtitle>
+      </ion-card-content>
+     <!--  <ion-item float-right>
+      <ion-button color="danger">Eliminar</ion-button>
+    </ion-item> -->
+    </ion-card>
+    <!-- [routerLink]="['/gestion/localizaciones/crear/null/'+ _empresa]"
+    routerDirection="forward" -->
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="empresa" [routerLink]="['/gestion/localizaciones/crear/null/'+ empresa.getId()]" routerDirection="forward"> 
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+  
+
+ </ion-content> 
+

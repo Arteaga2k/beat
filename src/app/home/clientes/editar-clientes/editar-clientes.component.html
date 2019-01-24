@@ -1,29 +1,22 @@
-<ion-header>    
+<ion-header>
 
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-    <!--   <ion-back-button [text]="buttonText" [icon]="buttonIcon">
-      </ion-back-button> -->
       <ion-button (click)="volverClick()">
-          <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
-        </ion-button>
-    </ion-buttons>
-    
-    <ion-buttons slot="secondary" *ngIf="!modoBusqueda">
-        <ion-back-button [text]="buttonText" [icon]="buttonIcon">
-          </ion-back-button>
-    </ion-buttons>
-
-    <ion-title>Editando cliente {{ cliente != null ? cliente.getNombre() : '' }}</ion-title>
-    <ion-buttons slot="primary" *ngIf="!modoBusqueda">     
-      <ion-button color="secondary">
-        <ion-icon slot="icon-only" name="more"></ion-icon>
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-  </ion-toolbar> 
-
+    <ion-buttons slot="end">
+      <ion-button (click)="onClick()" color="light">
+        <ion-icon slot="end" name="checkmark"></ion-icon>
+        Guardar
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Edición cliente</ion-title>
+  </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
-     <beatForm-alta-empresa [empresa]="cliente" rol_empresa="Cliente" redireccion="clientes"></beatForm-alta-empresa>
- </ion-content>
+  <beatForm-alta-empresa [tab]="_tab" cargando="true" [empresa]="cliente" rol_empresa="Cliente" redireccion="clientes"></beatForm-alta-empresa>
+</ion-content>

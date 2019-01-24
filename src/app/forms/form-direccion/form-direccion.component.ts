@@ -7,6 +7,7 @@ import { HomeComponent } from 'src/app/home/home.component';
 import { Direccion } from 'src/app/classes/direccion';
 import { LocalizacionService } from 'src/app/services/api/localizacion.service';
 import { DireccionService } from 'src/app/services/api/direccion.service';
+import { Observable, forkJoin } from 'rxjs';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -19,31 +20,33 @@ export class FormDireccionComponent implements OnInit {
   @Input() mostrarErrores: boolean;
   @Input() conTipoLocalizacion: boolean;
 
-  @Input() set tipoLocalizacion(tipoLocalizacion: number) {
-    this._tipoLocalizacion = tipoLocalizacion;
-    console.log(' tipo de localizacion ', this._tipoLocalizacion);
-  }
-
+  private _tipoLocalizacion: number;
+  @Input()
   get tipoLocalizacion(): number {
     return this._tipoLocalizacion;
   }
 
+  @Output() tipoLocalizacionChange = new EventEmitter<number>();
+  set tipoLocalizacion(tipoLocalizacion: number) {
+    this._tipoLocalizacion = tipoLocalizacion;
+    this.tipoLocalizacionChange.emit(this._tipoLocalizacion);
+  }
 
   @Input() set direccion(direccion: Direccion) {
     if (direccion) {
       // Rellenamos los datos del formulario
       this._direccion = direccion;
       this.municipio_sin_poner = this._direccion.getMunicipioId();
-      /* this.direccionForm.patchValue({
-         tipo_via_id: this._direccion.getTipoVia(),
-         nombre_via: this._direccion.getNombreVia(),
-         numero: this._direccion.getNumero(),
-         escalera: this._direccion.getEscalera(),
-         piso: this._direccion.getPiso(),
-         codigo_postal: this._direccion.getCodigoPostal(),
-         provincia_id: this._direccion.getProvinciaId(),
-         observaciones: this._direccion.getObservaciones()
-       });*/
+      this.direccionForm.patchValue({
+        tipo_via_id: this._direccion.getTipoVia(),
+        nombre_via: this._direccion.getNombreVia(),
+        numero: this._direccion.getNumero(),
+        escalera: this._direccion.getEscalera(),
+        piso: this._direccion.getPiso(),
+        codigo_postal: this._direccion.getCodigoPostal(),
+        provincia_id: this._direccion.getProvinciaId(),
+        observaciones: this._direccion.getObservaciones()
+      });
     }
     this.obtenerMunicipios();
   }
@@ -53,11 +56,11 @@ export class FormDireccionComponent implements OnInit {
   }
 
   private _direccion: Direccion;
-  private _tipoLocalizacion: number;
   private municipio_sin_poner: number = null;
 
+  private cargando: boolean = false;
   public direccionForm: FormGroup;
-  cargando_municipios = false;
+  //cargando_municipios = false;
   tipos_localizacion = [];
   provincias = [];
   municipios = [];
@@ -67,9 +70,29 @@ export class FormDireccionComponent implements OnInit {
     private localizacionSvc: LocalizacionService,
     private direccionSvc: DireccionService,
     @Inject(HomeComponent) private parent: HomeComponent
-  ) { }
+  ) {
+    this.crearFormulario();
+  }
 
   ngOnInit() {
+    this.cargando = true;
+
+
+    this.direccionSvc.getDatosDireccionForm()
+      .subscribe(res => {
+        console.log('res ', res);
+        this.tipos_via = res[0];
+
+        this.provincias = [];
+        for (const provincia of res[1]) {
+          this.provincias.push({
+            value: provincia.getId(),
+            label: provincia.getNombre()
+          });
+        }
+        this.cargando = false;       
+      });
+
     // Cargamos los tipos de localización existentes
     if (this.conTipoLocalizacion) {
       this.localizacionSvc
@@ -77,17 +100,13 @@ export class FormDireccionComponent implements OnInit {
         .subscribe(data => {
           this.tipos_localizacion = data;
           this.direccionForm.get('tipo_localizacion').setValue(this._tipoLocalizacion);
-        }, err => {
-          //todo manejar error
         });
     }
 
-    // Cargamos los tipos de vía existentes
+    /* // Cargamos los tipos de vía existentes
     this.direccionSvc.getTiposVia()
       .subscribe(data => {
         this.tipos_via = data;
-      }, err => {
-        //todo manejar error
       });
 
     // Cargamos las provincias
@@ -100,16 +119,16 @@ export class FormDireccionComponent implements OnInit {
             label: provincia.getNombre()
           });
         }
-      }, err => {
-        //todo manejar error
-      });
+      }); */
 
     // Creamos el formulario
     this.crearFormulario();
 
     // Indicamos al padre que ya tenemos el formulario montado
-    this.formReady.emit(this.direccionForm);
+    this.formReady.emit(this.direccionForm); 
   }
+
+
 
   crearFormulario() {
     this.direccionForm = new FormGroup({
@@ -148,15 +167,18 @@ export class FormDireccionComponent implements OnInit {
         this._direccion ? this._direccion.getObservaciones() : ''
       )
     });
+
     if (this.conTipoLocalizacion) {
       this.direccionForm.addControl('tipo_localizacion', new FormControl('', [Validators.required]));
     }
+    //this.cargando = false;
   }
 
   obtenerMunicipios() {
     let id_provincia = null;
     try {
       id_provincia = this.direccionForm.get('provincia_id').value;
+      console.log(' provincia id es ', id_provincia);
       if (id_provincia == null) {
         id_provincia = this.provincias[0].value;
       }
@@ -165,7 +187,7 @@ export class FormDireccionComponent implements OnInit {
     }
     this.municipios = [];
     if (!isNaN(id_provincia)) {
-      this.cargando_municipios = true;
+      //this.cargando_municipios = true;
       this.direccionSvc.getMunicipios(id_provincia)
         .subscribe(
           data => {
@@ -176,7 +198,7 @@ export class FormDireccionComponent implements OnInit {
                 label: municipio.getNombre()
               });
             }
-            this.cargando_municipios = false;
+            //this.cargando_municipios = false;
             if (this.municipio_sin_poner) {
               this.direccionForm.patchValue({
                 municipio_id: this._direccion.getMunicipioId(),
@@ -185,7 +207,7 @@ export class FormDireccionComponent implements OnInit {
             }
           },
           err => {
-            this.cargando_municipios = false;
+            //this.cargando_municipios = false;
           }
         );
     }

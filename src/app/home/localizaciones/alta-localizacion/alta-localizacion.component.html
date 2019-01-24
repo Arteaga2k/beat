@@ -1,5 +1,4 @@
 <ion-header>
-
     <ion-toolbar color="primary">
         <ion-buttons slot="start">
             <ion-button (click)="volverClick()">
@@ -8,7 +7,7 @@
         </ion-buttons>
         <ion-title>Alta cliente</ion-title>
         <ion-buttons slot="end">
-            <ion-button (click)="onClick()" color="light">
+            <ion-button (click)="guardarLocalizacion()" color="light">
                 <ion-icon slot="end" name="checkmark"></ion-icon>
                 Guardar
             </ion-button>
@@ -16,6 +15,6 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>    
-    <beatForm-alta-empresa [tab]="_tab" cargando="false" [empresa]="cliente" rol_empresa="Cliente" redireccion="clientes"></beatForm-alta-empresa>
+<ion-content padding>
+    <beatForm-alta-localizacion  (formReady)="formLocalizacionInicializado($event)"></beatForm-alta-localizacion>
 </ion-content>

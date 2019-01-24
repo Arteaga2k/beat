@@ -4,7 +4,7 @@ import { Empresa } from 'src/app/classes/empresa';
 import { ActivatedRoute } from '@angular/router';
 import { EmpresaService } from 'src/app/services/api/empresa.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
-import { MenuController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
 
 
 @Component({
@@ -14,22 +14,38 @@ import { MenuController } from '@ionic/angular';
 })
 export class EditarClientesComponent implements OnInit {
 
+  cargando: boolean = false;
   id_empresa = '';
   cliente: Empresa = null;
+  _tab: string = 'datos_personales_tab';
 
   constructor(
     private empresasSvc: EmpresaService,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private menuCtrl: MenuController,
-    private router: Router
+    private router: Router,
+    private navCtrl: NavController
   ) {
-    this.menuCtrl.enable(false);
+    //this.menuCtrl.enable(false);
 
   }
 
   ngOnInit() {
+    
+    this.route.queryParamMap.subscribe(queryParams => {
+      //console.log('params son ', queryParams); 
+      if (queryParams.get("tab")) {
+        this._tab = queryParams.get("tab");   
+      }
+     
+    })
 
+   
+
+
+
+    this.cargando = true;
     this.id_empresa = this.route.snapshot.paramMap.get('id');
     this.obtenerCliente();
   }
@@ -40,6 +56,7 @@ export class EditarClientesComponent implements OnInit {
       cliente => {
         console.log(' EditarClienteComponent getCliente', cliente);
         this.cliente = cliente;
+        this.cargando = false;
       },
       err => {
         console.log(' error get cliente ', err);
@@ -53,6 +70,7 @@ export class EditarClientesComponent implements OnInit {
         snackBarRef.afterDismissed().subscribe(info => {
           if (info.dismissedByAction === true) {
             //todo hacer cosas   
+            this.cargando = false;
           }
         }
         );
@@ -61,8 +79,10 @@ export class EditarClientesComponent implements OnInit {
 
   }
 
-  volverClick() {
-    this.router.navigateByUrl('gestion/clientes/listar');
+  volverClick() {    
+
+    this.router.navigateByUrl('gestion/clientes/listar', { replaceUrl: true })  
+    
   }
 
 }

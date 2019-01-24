@@ -17,12 +17,7 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-title>Clientes</ion-title>
-    <ion-buttons slot="primary" *ngIf="!modoBusqueda">
-      <ion-button color="secondary">
-        <ion-icon slot="icon-only" name="more"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+    <ion-title>Clientes</ion-title>    
   </ion-toolbar>
 
 </ion-header>
@@ -80,7 +75,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="clienteSeleccionado(row)"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="'/gestion/clientes/editar/' + row.getId()" routerDirection="forward"></tr>
   </table>
 
   <ion-fab vertical="bottom"  horizontal="end" slot="fixed" [routerLink]="'/gestion/clientes/crear'" routerDirection="forward">

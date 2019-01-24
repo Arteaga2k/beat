@@ -8,7 +8,7 @@
     <mat-progress-bar mode="query" color="accent" *ngIf="cargando"></mat-progress-bar>
     <ion-card *ngFor="let localizacion of localizaciones" [ngStyle]="{'border-left': '20px solid', 'color': estiloBorde(localizacion)['border-color']}"
         (click)="seleccionar(localizacion)">
-        <ion-img [src]="'/assets/images/localizaciones/'+localizacion.getImagen()"></ion-img>
+        <ion-img  class="imagen_localizacion" [src]="'/assets/images/localizaciones/'+localizacion.getImagen()"></ion-img>
         <ion-card-header class="header_cabeceras">
             <h3>{{ localizacion.getNombre() }}</h3>
         </ion-card-header>
