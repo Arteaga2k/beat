@@ -17,14 +17,24 @@ export class AppComponent {
     },  
     {
       title: 'Clientes',
-      url: '/gestion/clientes/listar',
+      url: '/clientes/listar',
       icon: 'list'
     },
     {
       title: 'Usuarios',
-      url: '/gestion/usuarios/listar',
+      url: '/usuarios/listar',
       icon: 'list'
     },
+  /*   {
+      title: 'Clientes',
+      url: '/gestion/clientes/listar',
+      icon: 'list'
+    }, */
+    /* {
+      title: 'Usuarios',
+      url: '/gestion/usuarios/listar',
+      icon: 'list'
+    }, */
     {
       title: 'Proveedores',
       url: '/proveedores',

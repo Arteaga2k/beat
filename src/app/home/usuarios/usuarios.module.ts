@@ -8,6 +8,7 @@ import { MatTableModule, MatSortModule, MatSnackBarModule, MatProgressBarModule 
 import { CustomFormModule } from 'src/app/forms/custom.form.module';
 
 import { UsuariosPopoverComponent } from 'src/app/forms/usuarios-popover/usuarios-popover.component';
+import { AltaUsuarioComponent } from './alta-usuario/alta-usuario.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,7 @@ import { UsuariosPopoverComponent } from 'src/app/forms/usuarios-popover/usuario
     MatProgressBarModule 
     
   ],
-  declarations: [],
+  declarations: [AltaUsuarioComponent],
   entryComponents: [UsuariosPopoverComponent]
 })
 export class UsuariosModule {}

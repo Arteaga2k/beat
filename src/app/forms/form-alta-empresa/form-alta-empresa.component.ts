@@ -93,7 +93,7 @@ export class FormAltaEmpresaComponent implements OnInit {
   constructor(
     private empresasSvc: EmpresaService,
     private router: Router,
-    @Inject(HomeComponent) private parent: HomeComponent,
+   // @Inject(HomeComponent) private parent: HomeComponent,
     private snackBar: MatSnackBar
   ) { }
 

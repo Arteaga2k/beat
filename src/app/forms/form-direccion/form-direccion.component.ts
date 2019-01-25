@@ -69,7 +69,7 @@ export class FormDireccionComponent implements OnInit {
   constructor(
     private localizacionSvc: LocalizacionService,
     private direccionSvc: DireccionService,
-    @Inject(HomeComponent) private parent: HomeComponent
+   // @Inject(HomeComponent) private parent: HomeComponent
   ) {
     this.crearFormulario();
   }

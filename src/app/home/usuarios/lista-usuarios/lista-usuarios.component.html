@@ -25,25 +25,57 @@
 </ion-header>
 <mat-progress-bar mode="query" color="accent" *ngIf="cargando"></mat-progress-bar>
 
+<ion-content [scrollEvents]="true" (ionScroll)="scrolling($event)">
+        {{ usuarios.length }}
+    <ion-virtual-scroll [items]="usuarios_filtrado">
+        <ion-item *virtualItem="let item">
+            <ion-thumbnail slot="start">
+               <!--  <img [src]="'/assets/images/localizaciones/almacen.jpg'" /> -->
+                <ion-img [src]="'/assets/images/localizaciones/almacen.jpg'"></ion-img>
+            </ion-thumbnail>
+            <ion-label>
+                <h3>{{ item.getNombre() }}</h3>
+                <p>
+                    <ion-icon name="information-circle" color="primary"></ion-icon> {{ item.getCargo() }}
+                </p>
+                <p>
+                    <ion-icon name="mail" color="primary"></ion-icon>
+                    {{ item.getEmail() }}
+                </p>
 
+            </ion-label>
+        </ion-item>
+    </ion-virtual-scroll>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" [routerLink]="'/usuarios/crear'" routerDirection="forward">
+        <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+</ion-content>
 <!-- <ion-virtual-scroll [items]="usuarios"> -->
-{{ usuarios.length }}
-<ion-virtual-scroll [items]="usuarios_filtrado">
+
+<!-- <ion-virtual-scroll [items]="usuarios_filtrado">
     <ion-item *virtualItem="let item">
         <ion-thumbnail slot="start">
             <img [src]="'/assets/images/localizaciones/almacen.jpg'" />
         </ion-thumbnail>
         <ion-label>
-                <h3>{{ item.getNombre() }}</h3>
-                <p> <ion-icon name="information-circle" color="primary"></ion-icon> {{ item.getCargo() }}</p>     
-                <p><ion-icon name="mail" color="primary"></ion-icon>
-                    {{ item.getEmail() }}</p>
+            <h3>{{ item.getNombre() }}</h3>
+            <p>
+                <ion-icon name="information-circle" color="primary"></ion-icon> {{ item.getCargo() }}
+            </p>
+            <p>
+                <ion-icon name="mail" color="primary"></ion-icon>
+                {{ item.getEmail() }}
+            </p>
 
         </ion-label>
-        
 
-        
-    </ion-item>
+
+
+    </ion-item> -->
 
 
     <!--    <ion-content [scrollEvents]="true" (ionScroll)="scrolling($event)">
@@ -78,8 +110,8 @@
                 
                 </ion-content> -->
 
-
-</ion-virtual-scroll>
+<!-- 
+</ion-virtual-scroll> -->
 
 
 <!-- <ion-content [scrollEvents]="true" (ionScroll)="scrolling($event)">

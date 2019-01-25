@@ -111,7 +111,7 @@ export class ListaUsuariosComponent implements OnInit {
     //console.log('showtoolbar ' , this.showToolbar);
 
     this.fabRef = this.element.nativeElement.querySelectorAll("ion-fab")[0];
-    this.renderer.setStyle(this.fabRef, 'bottom', this.showToolbar == true ? '80px':'130px');
+    this.renderer.setStyle(this.fabRef, 'bottom', this.showToolbar == true ? '30px':'80px');
 
     this.renderer.setStyle(this.fabRef, 'webkitTransition', 'transform 500ms,top 500ms');
   }
@@ -211,11 +211,11 @@ export class ListaUsuariosComponent implements OnInit {
 
     if (event.detail.scrollTop - this.storedScroll > this.threshold) {
       console.log("Scrolling down");
-      this.renderer.setStyle(this.fabRef, 'bottom', this.showToolbar == true ? '80px':'130px');
+      this.renderer.setStyle(this.fabRef, 'bottom', this.showToolbar == true ? '30px':'80px');
       this.renderer.setStyle(this.fabRef, 'webkitTransform', 'scale3d(0,0,0)');
     } else if (event.detail.scrollTop - this.storedScroll < 0) {
       console.log("Scrolling up");
-      this.renderer.setStyle(this.fabRef, 'bottom', this.showToolbar == true ? '80px':'130px');
+      this.renderer.setStyle(this.fabRef, 'bottom', this.showToolbar == true ? '30px':'80px');
       this.renderer.setStyle(this.fabRef, 'webkitTransform', 'scale3d(1,1,1)');
     }
 
@@ -300,5 +300,10 @@ export class ListaUsuariosComponent implements OnInit {
       return -1;
     return 0;
   }
+
+  normalTrack(index, item) {
+	  console.log('normalTrack', index, item);
+	  return item.id;
+	}
 
 }

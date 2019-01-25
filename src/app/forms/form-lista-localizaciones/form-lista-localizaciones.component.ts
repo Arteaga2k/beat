@@ -59,7 +59,7 @@ export class FormListaLocalizacionesComponent implements OnInit {
   private threshold: number = 10;
 
   constructor(
-    @Inject(HomeComponent) private parent: HomeComponent,
+    //@Inject(HomeComponent) private parent: HomeComponent,
     private localizacionesSvc: LocalizacionService,
     private empresasSvc: EmpresaService,
     private snackBar: MatSnackBar,
