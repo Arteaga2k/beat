@@ -1,8 +1,9 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LocalizacionService } from 'src/app/services/api/localizacion.service';
 import { EmpresaService } from 'src/app/services/api/empresa.service';
 import { MatSnackBar } from '@angular/material';
+import { Localizacion } from 'src/app/classes/localizacion';
 
 @Component({
   selector: 'beatForm-alta-localizacion',
@@ -12,7 +13,28 @@ import { MatSnackBar } from '@angular/material';
 export class FormAltaLocalizacionComponent implements OnInit {
 
   @Output() formReady = new EventEmitter<FormGroup>();
+  @Input() set localizacion(localizacion: Localizacion) {
+    if (localizacion) {
+      // Rellenamos los datos del formulario
+      this._localizacion = localizacion;
+    
+      this.localizacionForm.patchValue({
 
+        nombre: this.localizacion.getNombre(),
+        email: this.localizacion.getEmail(),
+        color: this.localizacion.getColor(),
+        telefono: this.localizacion.getTelefono(),
+        imagen: null
+      });
+    }
+    
+  }
+
+  get localizacion(): Localizacion {
+    return this._localizacion;
+  }
+
+  private _localizacion: Localizacion;
   public localizacionForm: FormGroup;
   mostrarErrores = false;
   paleta_colores = [];

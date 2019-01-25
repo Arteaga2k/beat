@@ -14,7 +14,7 @@
             </ion-button>
         </ion-buttons>
 
-        <ion-title>Usuarios</ion-title>
+        <ion-title>Usuarios </ion-title>
         <ion-buttons slot="primary" *ngIf="!modoBusqueda">
 
             <ion-button (click)="presentPopover($event)">
@@ -27,9 +27,63 @@
 
 
 <!-- <ion-virtual-scroll [items]="usuarios"> -->
+{{ usuarios.length }}
+<ion-virtual-scroll [items]="usuarios_filtrado">
+    <ion-item *virtualItem="let item">
+        <ion-thumbnail slot="start">
+            <img [src]="'/assets/images/localizaciones/almacen.jpg'" />
+        </ion-thumbnail>
+        <ion-label>
+                <h3>{{ item.getNombre() }}</h3>
+                <p> <ion-icon name="information-circle" color="primary"></ion-icon> {{ item.getCargo() }}</p>     
+                <p><ion-icon name="mail" color="primary"></ion-icon>
+                    {{ item.getEmail() }}</p>
 
- <ion-content [scrollEvents]="true" (ionScroll)="scrolling($event)">       
+        </ion-label>
+        
 
+        
+    </ion-item>
+
+
+    <!--    <ion-content [scrollEvents]="true" (ionScroll)="scrolling($event)">
+                    {{ usuarios.length }}
+                
+                    <ion-card *virtualItem="let item">
+                        <ion-avatar class="imagen_cliente" slot="end" float-right>
+                            <img [src]="'/assets/images/localizaciones/almacen.jpg'" />
+                        </ion-avatar>
+                        <ion-card-header class="header_cabeceras">
+                            <b>
+                                <h3>{{ item.getNombre() }}</h3>
+                            </b>
+                        </ion-card-header>
+                        <ion-card-content>
+                            <ion-card-subtitle>
+                                <ion-icon name="information-circle" color="primary"></ion-icon> {{ item.getCargo() }}
+                            </ion-card-subtitle>
+                            <ion-card-subtitle>
+                                <ion-icon name="mail" color="primary"></ion-icon>
+                                {{ item.getEmail() }}
+                            </ion-card-subtitle>
+                        </ion-card-content>
+                    </ion-card>
+                
+                    <ion-fab vertical="bottom" horizontal="end" slot="fixed" [routerLink]="'/gestion/usuarios/crear'" routerDirection="forward">
+                        <ion-fab-button>
+                            <ion-icon name="add"></ion-icon>
+                        </ion-fab-button>
+                    </ion-fab>
+                
+                
+                </ion-content> -->
+
+
+</ion-virtual-scroll>
+
+
+<!-- <ion-content [scrollEvents]="true" (ionScroll)="scrolling($event)">
+    {{ usuarios.length }}
 
     <ion-card *ngFor="let item of usuarios_filtrado">
         <ion-avatar class="imagen_cliente" slot="end" float-right>
@@ -49,16 +103,16 @@
                 {{ item.getEmail() }}
             </ion-card-subtitle>
         </ion-card-content>
-    </ion-card> 
+    </ion-card>
 
-<ion-fab vertical="bottom" horizontal="end" slot="fixed" [routerLink]="'/gestion/usuarios/crear'" routerDirection="forward">
-    <ion-fab-button>
-        <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-</ion-fab>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" [routerLink]="'/gestion/usuarios/crear'" routerDirection="forward">
+        <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 
 
- </ion-content> 
+</ion-content> -->
 
 
 

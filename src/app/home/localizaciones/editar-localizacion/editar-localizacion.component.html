@@ -5,7 +5,7 @@
                 <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
             </ion-button>
         </ion-buttons>
-        <ion-title>Alta localización</ion-title>
+        <ion-title>Editando localización</ion-title>
         <ion-buttons slot="end">
             <ion-button (click)="guardarLocalizacion()" color="light">
                 <ion-icon slot="end" name="checkmark"></ion-icon>
@@ -15,6 +15,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<mat-progress-bar mode="query" color="accent" *ngIf="cargando"></mat-progress-bar>
+<ion-content padding>  
     <beatForm-alta-localizacion  [localizacion]="localizacion" (formReady)="formLocalizacionInicializado($event)"></beatForm-alta-localizacion>
 </ion-content>

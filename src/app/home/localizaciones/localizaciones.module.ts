@@ -13,7 +13,8 @@ import { CustomFormModule } from 'src/app/forms/custom.form.module';
 import { MatProgressBarModule } from '@angular/material';
 
 import { AltaLocalizacionComponent }from './alta-localizacion/alta-localizacion.component';
-import { ListaLocalizacionComponent } from './lista-localizacion/lista-localizacion.component' ;
+import { ListaLocalizacionComponent } from './lista-localizacion/lista-localizacion.component';
+import { EditarLocalizacionComponent } from './editar-localizacion/editar-localizacion.component' ;
 
 
 
@@ -32,6 +33,6 @@ import { ListaLocalizacionComponent } from './lista-localizacion/lista-localizac
     
   ],
   providers: [ ],
-  declarations: [AltaLocalizacionComponent]
+  declarations: [AltaLocalizacionComponent, EditarLocalizacionComponent]
 })
 export class LocalizacionesModule {}

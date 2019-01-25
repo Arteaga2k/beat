@@ -141,6 +141,11 @@ export class ListaUsuariosComponent implements OnInit {
           if (data.data) {
             for (const u of data.data) {
               this.usuarios.push(new Usuario(u));
+             //todo borrar carga datos
+              for (let index = 0; index < 10; index++) {
+                this.usuarios.push(new Usuario(u));
+                
+              } 
             }
           }
           console.log('usuarios ', this.usuarios);

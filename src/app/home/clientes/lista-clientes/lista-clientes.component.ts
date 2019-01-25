@@ -73,14 +73,9 @@ export class ListaClientesComponent implements OnInit {
         this.clientes = [];
         if (data.clientes) {
           for (const c of data.clientes) {
-            this.clientes.push(new Empresa(c));
-          }
-
-          for (const c of data.clientes) {
-            this.clientes.push(new Empresa(c));
-          }
-
-          for (const c of data.clientes) {
+            /* for (let index = 0; index < 500; index++) {
+              this.clientes.push(new Empresa(c));              
+            } */
             this.clientes.push(new Empresa(c));
           }
         }

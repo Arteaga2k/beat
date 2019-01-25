@@ -1,4 +1,4 @@
-<!-- <ion-header>
+<!--  <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -7,7 +7,7 @@
       Home
     </ion-title>
   </ion-toolbar>
-</ion-header> -->
-<ion-content>
+</ion-header>  -->
+<ion-content [ngStyle]="{'overflow-y': 'hidden !important' }" class="no-scroll"> 
   <router-outlet></router-outlet>
 </ion-content>

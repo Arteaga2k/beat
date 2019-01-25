@@ -58,7 +58,7 @@ export class FormAltaEmpresaComponent implements OnInit {
 
       //TODO BORRAR
       empresa.getLocalizaciones().forEach(element => {
-        for (let index = 0; index < 10; index++) {
+        for (let index = 0; index < 50; index++) {
           this.empresaLocalizaciones.push(new Localizacion(element));
         }
       });

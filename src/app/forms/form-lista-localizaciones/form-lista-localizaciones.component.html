@@ -1,6 +1,7 @@
 <ion-content [scrollEvents]="true" (ionScroll)="scrolling($event)">  
+  {{ localizaciones.length }}
  
-    <ion-card *ngFor="let localizacion of localizaciones" [routerLink]="['/gestion/localizaciones/crear/'+ localizacion.getId() + '/'+ empresa.getId()]" routerDirection="forward">
+    <ion-card *ngFor="let localizacion of localizaciones" [routerLink]="['/gestion/localizaciones/editar/'+ localizacion.getId() + '/'+ empresa.getId()]" routerDirection="forward">
       <ion-avatar class="imagen_cliente" slot="end" float-right>
         <img [src]="'/assets/images/localizaciones/' + localizacion.getImagen()" />
 
@@ -26,7 +27,7 @@
     <!-- [routerLink]="['/gestion/localizaciones/crear/null/'+ _empresa]"
     routerDirection="forward" -->
 
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="empresa" [routerLink]="['/gestion/localizaciones/crear/null/'+ empresa.getId()]" routerDirection="forward"> 
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed"  [routerLink]="['/gestion/localizaciones/crear/null/'+ empresa.getId()]" routerDirection="forward"> 
       <ion-fab-button>
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>

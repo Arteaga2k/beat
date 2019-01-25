@@ -21,9 +21,10 @@ export class FormListaLocalizacionesComponent implements OnInit {
 
   @Input()
   set empresa(empresa: Empresa) {
-    if (empresa) { 
+    if (empresa) {
       this._empresa = empresa;
       console.log('FormListaLocalizacionesComponent ', empresa);
+    
     }
   }
 
@@ -107,9 +108,10 @@ export class FormListaLocalizacionesComponent implements OnInit {
     console.log('showtoolbar ', this.showToolbar);
 
     this.fabRef = this.element.nativeElement.querySelectorAll("ion-fab")[0];
-    this.renderer.setStyle(this.fabRef, 'bottom', this.showToolbar == true ? '80px' : '130px');
-
-    this.renderer.setStyle(this.fabRef, 'webkitTransition', 'transform 500ms,top 500ms');
+    if (this.fabRef) {
+      this.renderer.setStyle(this.fabRef, 'bottom', this.showToolbar == true ? '80px' : '130px');
+      this.renderer.setStyle(this.fabRef, 'webkitTransition', 'transform 500ms,top 500ms');
+    }
   }
 
 
@@ -142,7 +144,7 @@ export class FormListaLocalizacionesComponent implements OnInit {
   }
 
   cargaLocalizaciones() {
-    console.log('cargaLocalizaciones' ,this.empresa);
+    console.log('cargaLocalizaciones', this.empresa);
     this.empresasSvc.getLocalizaciones(this.empresa).subscribe(
       datos => {
         this.localizaciones = [];

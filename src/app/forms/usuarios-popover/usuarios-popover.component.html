@@ -16,24 +16,24 @@
 <!--   </ion-list-header> -->
 
   <ion-item style="--border-style: none !important;--min-height: 0 !important;" (click)="setOrden('nombre')">
-    <ion-button color="{{ field == 'nombre' ? 'success' : '' }}" style="--min-height: 0!important;width: 100%!important;"
+    <ion-button size="big" color="{{ field == 'nombre' ? 'success' : '' }}" style="--min-height: 0!important;width: 100%!important;"
       expand="full">Nombre<ion-icon *ngIf="field == 'nombre'" slot="end" name="{{ orden_nombre }}"></ion-icon></ion-button>
   </ion-item>
 
   <ion-item style="--border-style: none !important;--min-height: 0 !important;" (click)="setOrden('cif')">
-    <ion-button color="{{ field == 'cif' ? 'success' : '' }}" style="--min-height: 0!important;width: 100%!important;"
+    <ion-button size="big"color="{{ field == 'cif' ? 'success' : '' }}" style="--min-height: 0!important;width: 100%!important;"
       expand="full">CIF/DNI<ion-icon *ngIf="field == 'cif'" slot="end" name="{{ orden_cif }}"></ion-icon></ion-button>
   </ion-item>
 
   <ion-item style="--border-style: none;--min-height: 0 !important;" (click)="setOrden('email')">
-    <ion-button color="{{ field == 'email' ? 'success' : '' }}" style="--min-height: 0!important;width: 100%!important;"
+    <ion-button size="big" color="{{ field == 'email' ? 'success' : '' }}" style="--min-height: 0!important;width: 100%!important;"
       expand="full">
       Email<ion-icon *ngIf="field == 'email'" slot="end" name="{{ orden_email }}"></ion-icon>
     </ion-button>
   </ion-item>  
 
   <ion-item float-right style="--border-style: none !important;--min-height: 0 !important;">
-    <ion-button color="light" size="small" (click)="guardarFiltro()" >
+    <ion-button size="big" color="light" size="small" (click)="guardarFiltro()" >
       Guardar<ion-icon slot="end" name="checkmark"></ion-icon>
     </ion-button>
   </ion-item>
